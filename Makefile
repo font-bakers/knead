@@ -1,7 +1,7 @@
 .PHONY: help init venv format
 .DEFAULT_GOAL = help
 
-PYTHON = python
+PYTHON = python3
 SHELL = bash
 VENV_PATH = venv
 
