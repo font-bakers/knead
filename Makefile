@@ -1,7 +1,7 @@
 .PHONY: help init venv format
 .DEFAULT_GOAL = help
 
-PYTHON = python
+PYTHON = python3
 SHELL = bash
 VENV_PATH = venv
 
@@ -18,4 +18,4 @@ venv:  # Create a Python virtual environment.
 	${SHELL} scripts/setup_venv.sh ${PYTHON} ${VENV_PATH}
 
 format:  # Format code in-place with black.
-	black src/
+	black knead/ --exclude=font_pb2.py
