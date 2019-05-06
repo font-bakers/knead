@@ -1,38 +1,15 @@
 #!/usr/bin/env bash
 
-# script from https://github.com/google/yapf/blob/ff7a28df11c8ec6a9a81409552b676427e07e823/plugins/pre-commit.sh
-
-# Git pre-commit hook to check staged Python files for formatting issues with
-# yapf.
-#
-# INSTALLING: Copy this script into `.git/hooks/pre-commit`, and mark it as
-# executable.
-#
-# This requires that yapf is installed and runnable in the environment running
-# the pre-commit hook.
-#
-# When running, this first checks for unstaged changes to staged files, and if
-# there are any, it will exit with an error. Files with unstaged changes will be
-# printed.
-#
-# If all staged files have no unstaged changes, it will run yapf against them,
-# leaving the formatting changes unstaged. Changed files will be printed.
-#
-# BUGS: This does not leave staged changes alone when used with the -a flag to
-# git commit, due to the fact that git stages ALL unstaged files when that flag
-# is used.
-
 # Find all staged Python files, and exit early if there aren't any.
-
 PYTHON_FILES=$(git diff --name-only --cached --diff-filter=AM | grep --color=never '.py$')
 if [ -z "${PYTHON_FILES}" ]; then
   echo 'no staged python files'
   exit 0
 fi
 
-# Verify that yapf is installed; if not, warn and exit.
-if ! command -v yapf >/dev/null; then
-  echo 'black not on path; can not format. Please install yapf:'
+# Verify that black is installed; if not, warn and exit.
+if ! command -v black >/dev/null; then
+  echo 'black not on path; can not format. Please install black:'
   echo '    pip install black'
   exit 2
 fi
