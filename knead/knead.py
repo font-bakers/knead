@@ -1,12 +1,20 @@
+#!/bin/python
+
+import os
 from absl import flags, app
 from glob import glob
 
 FLAGS = flags.FLAGS
+MODES = [
+    "font2proto",  # Convert font files to protobufs
+    "proto2samples",  # Convert protobufs to Bezier samples
+    "render",  # Render glyphs
+]
 
 flags.DEFINE_string("dir", None, "Directory.")
-flags.mark_flags_as_required("dir")
-flags.DEFINE_string("mode", None, "Mode.")
-flags.mark_flags_as_required("mode")
+flags.mark_flag_as_required("dir")
+flags.DEFINE_enum("mode", None, MODES, "Mode.")
+flags.mark_flag_as_required("mode")
 
 
 def main(argv):
