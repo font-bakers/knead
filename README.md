@@ -7,8 +7,7 @@ Work in progress; details forthcoming.
 ```bash
 git clone https://github.com/font-bakers/knead.git
 cd knead/
-make init
-make venv
+make develop
 source venv/bin/activate
 # Do your work...
 deactivate

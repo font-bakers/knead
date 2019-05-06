@@ -1,4 +1,4 @@
-.PHONY: help init venv format
+.PHONY: help init venv develop format
 .DEFAULT_GOAL = help
 
 PYTHON = python3
@@ -16,6 +16,8 @@ init:  # Initialize git hooks for development.
 venv:  # Create a Python virtual environment.
 	rm -rf ${VENV_PATH}
 	${SHELL} scripts/setup_venv.sh ${PYTHON} ${VENV_PATH}
+
+develop: init venv  # Set up development environment.
 
 format:  # Format code in-place with black.
 	black knead/ --exclude=font_pb2.py
