@@ -1,5 +1,7 @@
 # Knead
 
+Work in progress; details forthcoming.
+
 ## Contributing
 
 ```bash
