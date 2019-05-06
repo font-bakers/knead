@@ -28,7 +28,7 @@ fi
 # changes.
 echo 'Formatting staged Python files . . .'
 
-black "${PYTHON_FILES[@]}"
+black "${PYTHON_FILES[@]}" --exclude=font_pb2.py
 
 CHANGED_FILES=$(git diff --name-only "${PYTHON_FILES[@]}")
 if [ -n "${CHANGED_FILES}" ]; then

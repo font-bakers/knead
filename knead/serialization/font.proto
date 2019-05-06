@@ -1,0 +1,13 @@
+syntax="proto2";
+
+message glyph{
+        repeated Font glyph=1;
+}
+message Font {	
+    
+    optional int32 num_contours=1;
+    repeated float bezier_points=2;
+    repeated int32 contour_locations=3;
+    optional string font_name=4;
+    optional string glyph_name=5;
+}
