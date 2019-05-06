@@ -6,7 +6,8 @@ from glob import glob
 
 FLAGS = flags.FLAGS
 MODES = [
-    "font2proto",  # Convert font files to protobufs
+    "font2ttx",  # Convert font files to ttx files
+    "ttx2proto",  # Convert ttx files to protobufs
     "proto2samples",  # Convert protobufs to Bezier samples
     "render",  # Render glyphs
 ]
