@@ -1,4 +1,4 @@
-# Knead
+![Knead logo](docs/logo.png?raw=true "Title")
 
 Work in progress; details forthcoming.
 
