@@ -2,21 +2,21 @@ language: python
 
 matrix:
   include:
-  - name: "Python 3.6 Test"
-    python: 3.6
-    env: PYTHON_VERSION=3.6 NAME="TEST"
+# - name: "Python 3.6 Test"
+#   python: 3.6
+#   env: PYTHON_VERSION=3.6 NAME="TEST"
   - name: "Python 3.6 Lint"
     python: 3.6
     env: PYTHON_VERSION=3.6 NAME="LINT"
 
 install:
   - make venv
-  - pip install coveralls
+# - pip install coveralls
   - pip freeze
 
 script:
-  - if [[ $NAME == TEST ]]; then make test; fi
-  - if [[ $NAME == LINT ]]; then make format; fi
+# - if [[ $NAME == TEST ]]; then make test; fi
+  - if [[ $NAME == LINT ]]; then black --check --exclude=font_pb2.py knead/; fi
 
 after_success:
-  - coveralls
+# - coveralls
