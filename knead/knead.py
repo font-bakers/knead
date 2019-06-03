@@ -1,8 +1,6 @@
 #!/bin/python
 
-import os
 from absl import flags, app
-from glob import glob
 
 FLAGS = flags.FLAGS
 MODES = [
