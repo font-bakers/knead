@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -18,9 +17,10 @@ _sym_db = _symbol_database.Default()
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='font.proto',
   package='',
+  syntax='proto2',
+  serialized_options=None,
   serialized_pb=_b('\n\nfont.proto\"\x1d\n\x05glyph\x12\x14\n\x05glyph\x18\x01 \x03(\x0b\x32\x05.Font\"u\n\x04\x46ont\x12\x14\n\x0cnum_contours\x18\x01 \x01(\x05\x12\x15\n\rbezier_points\x18\x02 \x03(\x02\x12\x19\n\x11\x63ontour_locations\x18\x03 \x03(\x05\x12\x11\n\tfont_name\x18\x04 \x01(\t\x12\x12\n\nglyph_name\x18\x05 \x01(\t')
 )
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
 
@@ -38,15 +38,16 @@ _GLYPH = _descriptor.Descriptor(
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -68,43 +69,44 @@ _FONT = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='bezier_points', full_name='Font.bezier_points', index=1,
       number=2, type=2, cpp_type=6, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='contour_locations', full_name='Font.contour_locations', index=2,
       number=3, type=5, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='font_name', full_name='Font.font_name', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='glyph_name', full_name='Font.glyph_name', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -115,6 +117,7 @@ _FONT = _descriptor.Descriptor(
 _GLYPH.fields_by_name['glyph'].message_type = _FONT
 DESCRIPTOR.message_types_by_name['glyph'] = _GLYPH
 DESCRIPTOR.message_types_by_name['Font'] = _FONT
+_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 glyph = _reflection.GeneratedProtocolMessageType('glyph', (_message.Message,), dict(
   DESCRIPTOR = _GLYPH,
