@@ -16,7 +16,7 @@ install:
 
 script:
 # - if [[ $NAME == TEST ]]; then make test; fi
-  - if [[ $NAME == LINT ]]; then black --check --exclude=font_pb2.py knead/; fi
+  - if [[ $NAME == LINT ]]; then make lint; fi
 
 after_success:
 # - coveralls
