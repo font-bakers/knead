@@ -2,15 +2,15 @@ language: python
 
 matrix:
   include:
-  - name: "Python 3.6 Test"
-    python: 3.6
-    env: PYTHON_VERSION=3.6 NAME="TEST"
+  - name: "Python 3.5 Test"
+    python: 3.5
+    env: PYTHON_VERSION=3.5 NAME="TEST"
   - name: "Python 3.6 Lint"
     python: 3.6
     env: PYTHON_VERSION=3.6 NAME="LINT"
 
 install:
-  - make venv
+  - make venv  # Installing black in Python 3.5 will fail silently.
 # - pip install coveralls
   - pip freeze
 
