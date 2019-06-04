@@ -31,7 +31,7 @@ develop: init venv-develop  # Set up development environment.
 
 lint-black:
 	@printf "Checking code style with black...\n"
-	black knead/ --check --target-version py35 --exclude=font_pb2.py
+	black knead/ --check --target-version=py35 --exclude=font_pb2.py
 	@printf "\033[1;34mBlack passes!\033[0m\n\n"
 
 lint-pylint:
@@ -48,4 +48,4 @@ test:  # Run tests.
 check: lint test  # Alias for `make lint test`.
 
 black:  # Format code in-place with black.
-	black knead/ --target-version py35 --exclude=font_pb2.py
+	black knead/ --target-version=py35 --exclude=font_pb2.py
