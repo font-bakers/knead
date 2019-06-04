@@ -2,12 +2,12 @@ language: python
 
 matrix:
   include:
-  - name: "Python 3.5 Test"
-    python: 3.5
-    env: PYTHON_VERSION=3.5 NAME="TEST"
-  - name: "Python 3.5 Lint"
-    python: 3.5
-    env: PYTHON_VERSION=3.5 NAME="LINT"
+  - name: "Python 3.6 Test"
+    python: 3.6
+    env: PYTHON_VERSION=3.6 NAME="TEST"
+  - name: "Python 3.6 Lint"
+    python: 3.6
+    env: PYTHON_VERSION=3.6 NAME="LINT"
 
 install:
   - make venv
