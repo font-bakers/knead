@@ -1,4 +1,4 @@
-.PHONY: help init venv develop lint-black lint-pylint lint test check black
+.PHONY: help init venv venv-develop develop lint-black lint-pylint lint test check black
 .DEFAULT_GOAL = help
 
 PYTHON = python3
@@ -48,4 +48,4 @@ test:  # Run tests.
 check: lint test  # Alias for `make lint test`.
 
 black:  # Format code in-place with black.
-	black knead/ --exclude=font_pb2.py
+	black knead/ --target-version py35 --exclude=font_pb2.py
