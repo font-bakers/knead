@@ -23,12 +23,12 @@ develop: init venv  # Set up development environment.
 
 lint-black:
 	@printf "Checking code style with black...\n"
-	black knead/ --check --exclude=font_pb2.py
+	black knead/ --check --target-version py35 --exclude=font_pb2.py
 	@printf "\033[1;34mBlack passes!\033[0m\n\n"
 
 lint-pylint:
 	@printf "Checking code style with pylint...\n"
-	pylint knead/ --disable=all font_pb2.py
+	pylint knead/ --rcfile=.pylintrc --disable=all font_pb2.py
 	@printf "\033[1;34mPylint passes!\033[0m\n\n"
 
 lint: lint-black lint-pylint  # Check code style with black and pylint.
