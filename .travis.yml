@@ -1,21 +1,23 @@
 language: python
 
+# Black requires Python 3.6, so we test in Python 3.5 and lint in Python 3.6
 matrix:
   include:
-# - name: "Python 3.6 Test"
-#   python: 3.6
-#   env: PYTHON_VERSION=3.6 NAME="TEST"
+  - name: "Python 3.5 Test"
+    python: 3.5
+    env: PYTHON_VERSION=3.5 NAME="TEST"
   - name: "Python 3.6 Lint"
     python: 3.6
     env: PYTHON_VERSION=3.6 NAME="LINT"
 
 install:
-  - make venv
+  - if [[ $NAME == TEST ]]; then make venv; fi
+  - if [[ $NAME == LINT ]]; then make develop; fi
 # - pip install coveralls
   - pip freeze
 
 script:
-# - if [[ $NAME == TEST ]]; then make test; fi
+  - if [[ $NAME == TEST ]]; then make test; fi
   - if [[ $NAME == LINT ]]; then make lint; fi
 
 after_success:
