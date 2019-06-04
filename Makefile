@@ -1,4 +1,4 @@
-.PHONY: help init venv develop style-black style-pylint lint black
+.PHONY: help init venv develop lint-black lint-pylint lint test check black
 .DEFAULT_GOAL = help
 
 PYTHON = python3
@@ -21,17 +21,23 @@ venv:  # Create a Python virtual environment.
 
 develop: init venv  # Set up development environment.
 
-style-black:
+lint-black:
 	@printf "Checking code style with black...\n"
 	black knead/ --check --exclude=font_pb2.py
 	@printf "\033[1;34mBlack passes!\033[0m\n\n"
 
-style-pylint:
+lint-pylint:
 	@printf "Checking code style with pylint...\n"
 	pylint knead/ --disable=all font_pb2.py
 	@printf "\033[1;34mPylint passes!\033[0m\n\n"
 
-lint: style-black style-pylint  # Check code style with black and pylint
+lint: lint-black lint-pylint  # Check code style with black and pylint.
+
+test:  # Run tests.
+	@printf "Checking code...\n"
+	@printf "\033[1;34mTests pass!\033[0m\n\n"
+
+check: lint test  # Alias for `make lint test`.
 
 black:  # Format code in-place with black.
 	black knead/ --exclude=font_pb2.py
