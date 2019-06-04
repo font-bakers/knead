@@ -1,1 +1,1 @@
-from .utils.utils import CHARACTER_SET
+from .utils import CHARACTER_SET
