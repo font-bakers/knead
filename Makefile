@@ -13,7 +13,7 @@ init:  # Initialize git hooks for development.
 	find .git/hooks -type l -exec rm {} \;
 	find .githooks -type f -exec ln -sf ../../{} .git/hooks/ \;
 
-venv:  # Create a Python virtual environment.
+venv:  # Create a Python virtual environment for development.
 	@printf "Creating Python virtual environment...\n"
 	rm -rf ${VENV_PATH}
 	${SHELL} scripts/setup_venv.sh ${PYTHON} ${VENV_PATH}
