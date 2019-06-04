@@ -1,4 +1,4 @@
-CHARSET = {
+CHARACTER_SET = {
     "A",
     "B",
     "C",
