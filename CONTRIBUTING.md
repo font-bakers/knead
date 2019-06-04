@@ -16,11 +16,11 @@ deactivate
 ## Before committing
 
 ```bash
-make lint
-make test
+make check
 ```
 
-Make sure that checks and tests pass before committing. 
+Make sure that all checks pass before committing: you should get several blue
+success messages as each check passes.
 
 Note that `knead` uses a [pre-commit git
 hook](https://github.com/font-bakers/knead/blob/master/.githooks/pre-commit) to
