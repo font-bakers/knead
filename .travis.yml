@@ -1,6 +1,7 @@
 language: python
 
 # Black requires Python 3.6, so we test in Python 3.5 and lint in Python 3.6
+# Deploying docs requires mkdocs, so we deploy with the lint build.
 matrix:
   include:
   - name: "Python 3.5 Test"
@@ -20,7 +21,7 @@ script:
   - if [[ $NAME == LINT ]]; then make lint; fi
 
 before_deploy:
-  - mkdocs build --verbose --clean --strict
+  - if [[ $NAME == LINT ]]; mkdocs build --verbose --clean --strict; fi
 
 deploy:
   provider: pages
