@@ -1,6 +1,7 @@
 language: python
 
 # Black requires Python 3.6, so we test in Python 3.5 and lint in Python 3.6
+# Deploying docs requires mkdocs, so we deploy with the lint build.
 matrix:
   include:
   - name: "Python 3.5 Test"
@@ -9,14 +10,10 @@ matrix:
   - name: "Python 3.6 Lint"
     python: 3.6
     env: PYTHON_VERSION=3.6 NAME="LINT"
-  - name: "Python 3.6 Docs"
-    python: 3.6
-    env: PYTHON_VERSION=3.6 NAME="DOCS"
 
 install:
   - if [[ $NAME == TEST ]]; then make venv; fi
   - if [[ $NAME == LINT ]]; then make develop; fi
-  - if [[ $NAME == DOCS ]]; then pip install mkdocs; fi
   - pip freeze
 
 script:
@@ -24,7 +21,7 @@ script:
   - if [[ $NAME == LINT ]]; then make lint; fi
 
 before_deploy:
-  - if [[ $NAME == DOCS ]]; mkdocs build --verbose --clean --strict; fi
+  - if [[ $NAME == LINT ]]; mkdocs build --verbose --clean --strict; fi
 
 deploy:
   provider: pages
