@@ -43,6 +43,10 @@ lint: lint-black lint-pylint  # Check code style with black and pylint.
 
 test:  # Run tests.
 	@printf "Checking code...\n"
+	( \
+	cd knead/; \
+	sh ../scripts/test.sh; \
+	)
 	@printf "\033[1;34mTests pass!\033[0m\n\n"
 
 check: lint test  # Alias for `make lint test`.
