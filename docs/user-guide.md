@@ -1,4 +1,6 @@
-# Understanding the TTF/TTX File Formats
+# User Guide
+
+## The `.otf`, `.ttf` and `.ttx` Data Formats
 
 TTF stands for "TrueType Font", whereas TTX stands for "TrueType XML".
 
@@ -30,7 +32,7 @@ Now, there are some important rules on how to understand these points.
    start from there. If the last point is also "off" start with a virtual "on"
    in between the first and the last one.
 
-## References
+### References
 
 1. [_Glyph Hell_ by David
    Turner](http://chanae.walon.org/pub/ttf/ttf_glyphs.htm)
