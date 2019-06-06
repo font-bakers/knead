@@ -14,5 +14,8 @@ then
     exit 1
 fi
 
+# Convert ttx to dict. Rehash, and if data/ differs, test fail.
+python main.py --input ttx --output dict --directory ../data/
+
 # Remove temporary files.
 rm tmp0 tmp1

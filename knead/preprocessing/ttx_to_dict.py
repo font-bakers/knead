@@ -226,8 +226,7 @@ def get_contours(glyph, glyph_name, curves, font_file, em_value):
             contours = contours + get_component_contours(component, font_file)
     contour_dict = {}
     for i, contour in enumerate(contours):
-        curves = get_curves(contour, em_value)
-        contour_dict[i] = curves
+        contour_dict[i] = get_curves(contour, em_value)
     curves[glyph_name] = contour_dict
 
 
