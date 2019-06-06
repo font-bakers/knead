@@ -10,6 +10,6 @@ def font_to_ttx(directory):
         ttx_name = os.path.split(font)[-1].split(".")[0] + ".ttx"
         subprocess.call(
             "ttx -q -o {} {}".format(
-                font, os.path.join(directory, "ttx/", ttx_name)
+                os.path.join(directory, "ttx/", ttx_name), font
             ).split()
         )
