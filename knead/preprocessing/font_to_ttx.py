@@ -7,7 +7,9 @@ from tqdm import tqdm
 def font_to_ttx(directory):
     fonts = glob(os.path.join(directory, "font/", "*.[ot]tf"))
     for font in tqdm(fonts):
-        ttx_name = os.path.split(font)[-1].split('.')[0] + '.ttx'
+        ttx_name = os.path.split(font)[-1].split(".")[0] + ".ttx"
         subprocess.call(
-            "ttx -q -o {} {}".format(font, os.path.join(directory, "ttx/", ttx_name)).split()
+            "ttx -q -o {} {}".format(
+                font, os.path.join(directory, "ttx/", ttx_name)
+            ).split()
         )
