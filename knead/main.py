@@ -2,10 +2,8 @@
 
 from absl import flags, app
 from tqdm import tqdm
-from preprocessing.font_to_ttx import font_to_ttx
-
-# from preprocessing.ttx_to_dict import ttx_to_dict
-from utils.utils import get_filenames
+from knead.preprocessing import font_to_ttx, ttx_to_dict
+from knead.utils import get_filenames
 
 
 FLAGS = flags.FLAGS
@@ -62,7 +60,7 @@ def main(argv):
         if conversion == "font_to_ttx":
             convert = font_to_ttx
         elif conversion == "ttx_to_dict":
-            # convert = ttx_to_dict
+            convert = ttx_to_dict
             pass
         elif conversion == "dict_to_proto":
             pass
