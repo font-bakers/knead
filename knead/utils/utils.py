@@ -1,3 +1,8 @@
+from os.path import join
+from glob import glob
+from re import sub
+
+
 CHARACTER_SET = {
     "A",
     "B",
@@ -70,3 +75,25 @@ CHARACTER_SET = {
     "question",
     "at",
 }
+
+_FILE_EXTENSIONS = {
+    "font": ".ttf",
+    "ttx": ".ttx",
+    "dict": None,
+    "proto": ".proto",
+    "samples": None,
+}
+
+
+def get_filenames(directory, conversion):
+    convert_from, convert_to = conversion.split("_to_")
+    extension_from = _FILE_EXTENSIONS[convert_from]
+    extension_to = _FILE_EXTENSIONS[convert_to]
+
+    files_from = glob(join(directory, convert_from, "*" + extension_from))
+    files_to = [
+        sub("{}$".format(extension_from), extension_to, file_from)
+        for file_from in files_from
+    ]
+
+    return zip(files_from, files_to)
