@@ -1,11 +1,5 @@
 from xml.etree import cElementTree
-from absl import flags, app
 from knead.utils import CHARACTER_SET
-
-FLAGS = flags.FLAGS
-
-flags.DEFINE_string("file", None, "input ttx filename")
-flags.mark_flag_as_required("file")
 
 
 def create_point(left_point, right_point, em_value):
@@ -238,13 +232,9 @@ def get_contours(glyph, glyph_name, curves, font_file, em_value):
 
 
 def ttx_to_dict(file_from, file_to):
-    pass
+    with open(file_from, "r") as file_obj:
+        file_string = file_obj.read().encode("ascii", "ignore")
 
-
-def main(argv):
-    file_name = FLAGS.file
-    file_obj = open(file_name, "r")
-    file_string = file_obj.read().encode("ascii", "ignore")
     font_file = cElementTree.fromstring(file_string)
     units_per_em = font_file.findall(".//unitsPerEm")[0]
     em_value = float(units_per_em.get("value"))
@@ -259,7 +249,3 @@ def main(argv):
     for curve, points in curves.items():
         print(repr(curve), ":", points, ",")
     print("}")
-
-
-if __name__ == "__main__":
-    app.run(main)
