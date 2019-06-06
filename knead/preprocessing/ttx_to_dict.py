@@ -1,81 +1,8 @@
 from xml.etree import cElementTree
 from absl import flags, app
+from knead.utils import CHARACTER_SET
 
 FLAGS = flags.FLAGS
-DESIREDGLPYHS = set(
-    [
-        "A",
-        "B",
-        "C",
-        "D",
-        "E",
-        "F",
-        "G",
-        "H",
-        "I",
-        "J",
-        "K",
-        "L",
-        "M",
-        "N",
-        "O",
-        "P",
-        "Q",
-        "R",
-        "S",
-        "T",
-        "U",
-        "V",
-        "W",
-        "X",
-        "Y",
-        "Z",
-        "a",
-        "b",
-        "c",
-        "d",
-        "e",
-        "f",
-        "g",
-        "h",
-        "i",
-        "j",
-        "k",
-        "l",
-        "m",
-        "n",
-        "o",
-        "p",
-        "q",
-        "r",
-        "s",
-        "t",
-        "u",
-        "v",
-        "w",
-        "x",
-        "y",
-        "z",
-        "zero",
-        "one",
-        "two",
-        "three",
-        "four",
-        "five",
-        "six",
-        "seven",
-        "eight",
-        "nine",
-        "exclam",
-        "numbersign",
-        "dollar",
-        "percent",
-        "ampersand",
-        "asterisk",
-        "question",
-        "at",
-    ]
-)
 
 flags.DEFINE_string("file", None, "input ttx filename")
 flags.mark_flag_as_required("file")
@@ -84,13 +11,13 @@ flags.mark_flag_as_required("file")
 def createPoint(leftPoint, rightPoint, EMvalue):
     """
     create a virtual on-point in-between left and right off-points.
-    
+
     Parameters
     ----------
     leftPoint : XML object of the left point
-    
+
     rightPoint: XML object of the right point
-    
+
     EMvalue: size of EM box used to normalize new point
 
     Returns
@@ -109,11 +36,11 @@ def createPoint(leftPoint, rightPoint, EMvalue):
 def getCurves(contour, EMvalue):
     """
     unpack a contour to all of its Bezier curves
-    
+
     Parameters
     ----------
     contour: XML object of the contour
-    
+
     EMvalue : size of EM box, used to normalize points
 
     Returns
@@ -260,13 +187,13 @@ def getCompContour(component, fontFile):
     helper function to gather contours for a glyph that is defined in terms of
     another glyph
 
-    Parameters 
+    Parameters
     ----------
     component: the XML object for the component tag which corresponds to a
     different glyph
 
     fontFile: XML object of the ttx file for the given font
-            
+
     Returns
     -------
     all the contours from the component glyph
@@ -280,19 +207,19 @@ def getCompContour(component, fontFile):
 def getContours(glyph, glyphName, curves, fontFile, EMvalue):
     """
     Given a glyph get all the Bezier curves from each contour
-    
+
     Parameters
     ----------
     glyph: XML object for glyph
 
     glyphName: a string that corresponds to the name of the glyph
-    
+
     curves: a dictionary in which all of the Bezier curves will be placed
-    
+
     fontFile: XML object of the fontfile, used to pass into getCompContour
-    
+
     EMvalue: size of EM box used for nomalization purposes
-    
+
     Returns
     -------
     Nothing
@@ -320,7 +247,7 @@ def main(argv):
     glyphs = fontFile.findall(".//TTGlyph")
     for glyph in glyphs:
         glyphName = glyph.get("name")
-        if glyphName in DESIREDGLPYHS:
+        if glyphName in CHARACTER_SET:
             getContours(glyph, glyphName, curves, fontFile, EMvalue)
 
     print("{")
