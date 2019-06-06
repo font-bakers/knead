@@ -1,6 +1,8 @@
 #!/bin/python
 
 from absl import flags, app
+from preprocessing import font_to_ttx
+
 
 FLAGS = flags.FLAGS
 DATA_PIPELINE = ["font", "ttx", "dict", "proto", "samples"]
@@ -53,7 +55,7 @@ def main(argv):
     conversions = determine_conversions(FLAGS.input, FLAGS.output)
     for conversion in conversions:
         if conversion == "font_to_ttx":
-            pass
+            font_to_ttx.font_to_ttx(FLAGS.directory)
         elif conversion == "ttx_to_dict":
             pass
         elif conversion == "dict_to_proto":
