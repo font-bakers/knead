@@ -9,10 +9,14 @@ matrix:
   - name: "Python 3.6 Lint"
     python: 3.6
     env: PYTHON_VERSION=3.6 NAME="LINT"
+  - name: "Python 3.6 Docs"
+    python: 3.6
+    env: PYTHON_VERSION=3.6 NAME="DOCS"
 
 install:
   - if [[ $NAME == TEST ]]; then make venv; fi
   - if [[ $NAME == LINT ]]; then make develop; fi
+  - if [[ $NAME == DOCS ]]; then pip install mkdocs; fi
   - pip freeze
 
 script:
@@ -20,7 +24,7 @@ script:
   - if [[ $NAME == LINT ]]; then make lint; fi
 
 before_deploy:
-  - mkdocs build --verbose --clean --strict
+  - if [[ $NAME == DOCS ]]; mkdocs build --verbose --clean --strict; fi
 
 deploy:
   provider: pages
