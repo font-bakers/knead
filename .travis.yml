@@ -14,6 +14,7 @@ matrix:
 install:
   - if [[ $NAME == TEST ]]; then make venv; fi
   - if [[ $NAME == LINT ]]; then make develop; fi
+  - pip install mkdocs
   - pip freeze
 
 script:
@@ -21,7 +22,7 @@ script:
   - if [[ $NAME == LINT ]]; then make lint; fi
 
 before_deploy:
-  - if [[ $NAME == LINT ]]; then mkdocs build --verbose --clean --strict; fi
+  - mkdocs build --verbose --clean --strict
 
 deploy:
   provider: pages
