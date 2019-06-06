@@ -36,7 +36,7 @@ lint-black:
 
 lint-pylint:
 	@printf "Checking code style with pylint...\n"
-	pylint knead/ --rcfile=.pylintrc --disable=all font_pb2.py
+	pylint knead/ --rcfile=.pylintrc --ignore=font_pb2.py
 	@printf "\033[1;34mPylint passes!\033[0m\n\n"
 
 lint: lint-black lint-pylint  # Check code style with black and pylint.
