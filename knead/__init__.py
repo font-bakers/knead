@@ -1,4 +1,4 @@
 __version__ = "0.0.0"
 
-import preprocessing
-import utils
+from . import preprocessing
+from . import utils
