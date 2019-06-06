@@ -34,18 +34,19 @@ def determine_conversions(input_format, output_format):
     if input_idx == output_idx:
         msg = "Expected different input and output data formats, got identical data formats."
         raise ValueError(msg)
-    elif output_idx < input_idx:
+
+    if output_idx < input_idx:
         msg = "Conversion of data formats back the pipeline is not implemented yet."
         raise NotImplementedError(msg)
-    else:
-        conversions = [
-            "{}_to_{}".format(first_format, second_format)
-            for first_format, second_format in zip(
-                DATA_PIPELINE[input_idx:output_idx],
-                DATA_PIPELINE[input_idx + 1 : output_idx + 1],
-            )
-        ]
-        return conversions
+
+    conversions = [
+        "{}_to_{}".format(first_format, second_format)
+        for first_format, second_format in zip(
+            DATA_PIPELINE[input_idx:output_idx],
+            DATA_PIPELINE[input_idx + 1 : output_idx + 1],
+        )
+    ]
+    return conversions
 
 
 def main(argv):
