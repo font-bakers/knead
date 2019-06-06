@@ -1,5 +1,6 @@
 #/bin/bash
 # Sets up Python virtual environment for development.
+set -e
 
 PYTHON=$1
 VENV_PATH=$2
@@ -14,5 +15,7 @@ do
    echo $line
    pip install $line
 done
+
+pip install -e .
 
 deactivate

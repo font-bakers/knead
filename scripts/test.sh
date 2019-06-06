@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Hash all files in data/ and write it to a temporary file.
 find ../data/ -type f -exec shasum {} \; > tmp0

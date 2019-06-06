@@ -25,7 +25,6 @@ venv-develop:
 	@printf "Creating Python virtual environment for development...\n"
 	rm -rf ${VENV_PATH}
 	${SHELL} scripts/setup_venv.sh ${PYTHON} ${VENV_PATH} requirements-dev.txt
-	source venv/bin/activate; pip install -e .; deactivate
 	@printf "\n\nVirtual environment created! \033[1;34mRun \`source venv/bin/activate\` to activate it.\033[0m\n\n\n"
 
 develop: init venv-develop  # Set up development environment.
