@@ -1,3 +1,4 @@
 -r requirements.txt
 black==19.3b0
+mkdocs==1.0.4
 pylint==2.3.1
