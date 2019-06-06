@@ -13,12 +13,19 @@ matrix:
 install:
   - if [[ $NAME == TEST ]]; then make venv; fi
   - if [[ $NAME == LINT ]]; then make develop; fi
-# - pip install coveralls
   - pip freeze
 
 script:
   - if [[ $NAME == TEST ]]; then make test; fi
   - if [[ $NAME == LINT ]]; then make lint; fi
 
-after_success:
-# - coveralls
+before_deploy:
+  - mkdocs build --verbose --clean --strict
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $github_token
+  local_dir: site
+  on:
+    branch: master
