@@ -21,7 +21,7 @@ script:
   - if [[ $NAME == LINT ]]; then make lint; fi
 
 before_deploy:
-  - if [[ $NAME == LINT ]]; mkdocs build --verbose --clean --strict; fi
+  - if [[ $NAME == LINT ]]; then mkdocs build --verbose --clean --strict; fi
 
 deploy:
   provider: pages
