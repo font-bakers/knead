@@ -92,7 +92,11 @@ def get_filenames(directory, conversion):
 
     files_from = glob(join(directory, convert_from, "*" + extension_from))
     files_to = [
-        sub("{}$".format(extension_from), extension_to, file_from)
+        sub(
+            "\/{}\/".format(convert_from),
+            "/{}/".format(convert_to),
+            sub("{}$".format(extension_from), extension_to, file_from),
+        )
         for file_from in files_from
     ]
 
