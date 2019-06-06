@@ -33,6 +33,7 @@ def create_point(left_point, right_point, em_value):
     return cElementTree.Element("pt", x=new_pointx, y=new_pointy, on="1")
 
 
+# pylint: disable=R0912,R0914,R0915
 def get_curves(contour, em_value):
     """
     unpack a contour to all of its Bezier curves
@@ -82,7 +83,7 @@ def get_curves(contour, em_value):
             starty = round(starty, 4)
             nextx = round(nextx, 4)
             nexty = round(nexty, 4)
-            if virtual_point != None:
+            if virtual_point is not None:
                 startx = virtual_point.get("x")
                 starty = virtual_point.get("y")
                 current_point = virtual_point
