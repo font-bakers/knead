@@ -237,6 +237,10 @@ def get_contours(glyph, glyph_name, curves, font_file, em_value):
     curves[glyph_name] = contour_dict
 
 
+def ttx_to_dict(file_from, file_to):
+    pass
+
+
 def main(argv):
     file_name = FLAGS.file
     file_obj = open(file_name, "r")
