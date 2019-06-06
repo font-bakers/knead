@@ -1,7 +1,7 @@
 #!/bin/python
 
 from absl import flags, app
-from .preprocessing import font_to_ttx
+from preprocessing import font_to_ttx
 
 
 FLAGS = flags.FLAGS
