@@ -19,13 +19,20 @@ script:
   - if [[ $NAME == TEST ]]; then make test; fi
   - if [[ $NAME == LINT ]]; then make lint; fi
 
-before_deploy:
-  - mkdocs build --verbose --clean --strict
-
-deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $github_token
-  local_dir: site
-  on:
-    branch: master
+jobs:
+  include:
+    - stage: install
+      script: pip install mkdocs
+      on:
+        branch: master
+    - stage: before_deploy
+      script: mkdocs build --verbose --clean --strict; fi
+      on:
+        branch: master
+    - stage: deploy
+      provider: pages
+      skip_cleanup: true
+      github_token: $github_token
+      local_dir: site
+      on:
+        branch: master
