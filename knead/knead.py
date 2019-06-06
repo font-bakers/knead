@@ -1,7 +1,11 @@
 #!/bin/python
 
 from absl import flags, app
-from preprocessing import font_to_ttx
+from tqdm import tqdm
+from preprocessing.font_to_ttx import font_to_ttx
+
+# from preprocessing.ttx_to_dict import ttx_to_dict
+from utils.utils import get_filenames
 
 
 FLAGS = flags.FLAGS
@@ -53,15 +57,20 @@ def determine_conversions(input_format, output_format):
 
 def main(argv):
     conversions = determine_conversions(FLAGS.input, FLAGS.output)
+
     for conversion in conversions:
         if conversion == "font_to_ttx":
-            font_to_ttx.font_to_ttx(FLAGS.directory)
+            convert = font_to_ttx
         elif conversion == "ttx_to_dict":
+            # convert = ttx_to_dict
             pass
         elif conversion == "dict_to_proto":
             pass
         elif conversion == "proto_to_samples":
             pass
+
+        for file_from, file_to in tqdm(get_filenames(FLAGS.directory, conversion)):
+            convert(file_from, file_to)
 
 
 if __name__ == "__main__":
