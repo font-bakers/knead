@@ -3,4 +3,5 @@ repo_url: https://github.com/font-bakers/knead
 nav:
     - Home: index.md
     - About: about.md
+    - User Guide: user-guide.md
 theme: readthedocs
