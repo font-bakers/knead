@@ -15,16 +15,16 @@ then
     exit 1
 fi
 
-# Convert ttx to dict. Rehash, and if data/ differs, test fail.
+# Convert ttx to json. Rehash, and if data/ differs, test fail.
 python main.py --input ttx --output json --directory ../data/
-find ../data/ -type f -exec shasum {} \; > tmp1
-diff tmp0 tmp1 > /dev/null
+find ../data/ -type f -exec shasum {} \; > tmp2
+diff tmp0 tmp2 > /dev/null
 if [ $? -eq 1 ]
 then
     echo "Test failed from ttf to ttx."
-    rm tmp0 tmp1
+    rm tmp0 tmp2
     exit 1
 fi
 
 # Remove temporary files.
-rm tmp0 tmp1
+rm tmp0 tmp1 tmp2
