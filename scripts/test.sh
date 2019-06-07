@@ -2,33 +2,26 @@
 set -e
 
 # Hash all files in data/ and write it to a temporary file.
-find ../data/ -type f -exec shasum {} \; > tmp0
+HASH0=$(find ../data/ -type f -exec shasum {} \;)
 
-# Convert ttf to ttx. Rehash, and if data/ differs, test fail.
+# Convert ttf to ttx. Rehash, and if hashes differ, fail test.
 python main.py --input ttf --output ttx --directory ../data/
-find ../data/ -type f -exec shasum {} \; > tmp1
-diff tmp0 tmp1 > /dev/null
-if [ $? -eq 1 ]
+HASH1=$(find ../data/ -type f -exec shasum {} \;)
+if [ "$HASH0" != "$HASH1" ]
 then
     echo "Test failed from ttf to ttx."
-    rm tmp*
     exit 1
 else
-    echo "Success!"
+    echo "Success from ttf to ttx!"
 fi
 
-# Convert ttx to json. Rehash, and if data/ differs, test fail.
+# Convert ttx to json. Rehash, and if hashes differ, fail test.
 python main.py --input ttx --output json --directory ../data/
-find ../data/ -type f -exec shasum {} \; > tmp2
-diff tmp0 tmp2 > /dev/null
-if [ $? -eq 1 ]
+HASH2=$(find ../data/ -type f -exec shasum {} \;)
+if [ "$HASH0" != "$HASH2" ]
 then
     echo "Test failed from ttf to ttx."
-    rm tmp*
     exit 1
 else
-    echo "Success!"
+    echo "Success from ttx to json!"
 fi
-
-# Remove temporary files.
-rm tmp*
