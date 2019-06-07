@@ -25,3 +25,12 @@ success messages as each check passes.
 Note that `knead` uses a [pre-commit git
 hook](https://github.com/font-bakers/knead/blob/master/.githooks/pre-commit) to
 format staged Python files in-place using `black`.
+
+## Development details
+
+- `knead` targets Python 3.5+ compatibility.
+- `knead` uses `black` and `pylint` to format and lint code, respectively.
+  - However, `black` requires Python 3.6+ to run. Thus, we test in Python 3.5
+    but lint in Python 3.6. See our [Travis
+    configuration](https://github.com/font-bakers/knead/blob/master/.travis.yml)
+    for more details.

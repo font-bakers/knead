@@ -1,3 +1,3 @@
 # Knead Documentation
 
-Happy baking! :bread:
+Happy baking!
