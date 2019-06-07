@@ -2,6 +2,9 @@ site_name: Knead
 repo_url: https://github.com/font-bakers/knead
 nav:
     - Home: index.md
-    - About: about.md
+    - Quickstart: quickstart.md
     - User Guide: user-guide.md
+    - About:
+      - Contributing: https://github.com/font-bakers/knead/blob/master/CONTRIBUTING.md
+      - License: https://github.com/font-bakers/knead/blob/master/LICENSE
 theme: readthedocs
