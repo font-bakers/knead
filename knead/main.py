@@ -1,11 +1,13 @@
 #!/bin/python
 
 from absl import flags, app
-from preprocessing import font_to_ttx
+from tqdm import tqdm
+from knead.preprocessing import ttf_to_ttx, ttx_to_json
+from knead.utils import get_filenames
 
 
 FLAGS = flags.FLAGS
-DATA_PIPELINE = ["font", "ttx", "dict", "proto", "samples"]
+DATA_PIPELINE = ["ttf", "ttx", "json", "proto", "samples"]
 
 flags.DEFINE_enum("input", None, DATA_PIPELINE, "Input data format.")
 flags.mark_flag_as_required("input")
@@ -53,15 +55,20 @@ def determine_conversions(input_format, output_format):
 
 def main(argv):
     conversions = determine_conversions(FLAGS.input, FLAGS.output)
+
     for conversion in conversions:
-        if conversion == "font_to_ttx":
-            font_to_ttx.font_to_ttx(FLAGS.directory)
-        elif conversion == "ttx_to_dict":
+        if conversion == "ttf_to_ttx":
+            convert = ttf_to_ttx
+        elif conversion == "ttx_to_json":
+            convert = ttx_to_json
             pass
-        elif conversion == "dict_to_proto":
+        elif conversion == "json_to_proto":
             pass
         elif conversion == "proto_to_samples":
             pass
+
+        for file_from, file_to in tqdm(get_filenames(FLAGS.directory, conversion)):
+            convert(file_from, file_to)
 
 
 if __name__ == "__main__":
