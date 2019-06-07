@@ -1,4 +1,5 @@
 from xml.etree import cElementTree
+import json
 from knead.utils import CHARACTER_SET
 
 
@@ -230,9 +231,9 @@ def get_contours(glyph, glyph_name, curves, font_file, em_value):
     curves[glyph_name] = contour_dict
 
 
-def ttx_to_dict(file_from, file_to):
-    with open(file_from, "r") as file_obj:
-        file_string = file_obj.read().encode("ascii", "ignore")
+def ttx_to_json(file_from, file_to):
+    with open(file_from, "r") as f:
+        file_string = f.read().encode("ascii", "ignore")
 
     font_file = cElementTree.fromstring(file_string)
     units_per_em = font_file.findall(".//unitsPerEm")[0]
@@ -244,7 +245,5 @@ def ttx_to_dict(file_from, file_to):
         if glyph_name in CHARACTER_SET:
             get_contours(glyph, glyph_name, curves, font_file, em_value)
 
-    print("{")
-    for curve, points in curves.items():
-        print(repr(curve), ":", points, ",")
-    print("}")
+    with open(file_to, "w+") as f:
+        json.dump(curves, f)

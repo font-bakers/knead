@@ -77,9 +77,9 @@ CHARACTER_SET = {
 }
 
 _FILE_EXTENSIONS = {
-    "font": ".ttf",
+    "ttf": ".ttf",
     "ttx": ".ttx",
-    "dict": ".pkl",
+    "json": ".json",
     "proto": ".proto",
     "samples": None,
 }
