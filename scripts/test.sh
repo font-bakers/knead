@@ -2,14 +2,14 @@
 set -e
 
 # Hash all files in data/ and write it to a temporary file.
-HASH0=$(find ../data/ -type f -exec shasum {} \;)
+HASH0=$(find data/ -type f -exec shasum {} \;)
 echo "Initial hash:"
 echo $HASH0
 echo
 
 # Convert ttf to ttx. Rehash, and if hashes differ, fail test.
-python main.py --input ttf --output ttx --directory ../data/
-HASH1=$(find ../data/ -type f -exec shasum {} \;)
+knead --input ttf --output ttx --directory data/
+HASH1=$(find data/ -type f -exec shasum {} \;)
 echo "ttf to ttx hash:"
 echo $HASH1
 if [ "$HASH0" != "$HASH1" ]
@@ -22,8 +22,8 @@ fi
 echo
 
 # Convert ttx to json. Rehash, and if hashes differ, fail test.
-python main.py --input ttx --output json --directory ../data/
-HASH2=$(find ../data/ -type f -exec shasum {} \;)
+knead --input ttx --output json --directory data/
+HASH2=$(find data/ -type f -exec shasum {} \;)
 echo "ttx to json hash:"
 echo $HASH2
 if [ "$HASH0" != "$HASH2" ]
