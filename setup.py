@@ -31,4 +31,5 @@ if __name__ == "__main__":
         url=URL,
         packages=find_packages(),
         python_requires=">=3.5.2",
+        entry_points={"console_scripts": ["knead = knead.__main__:main"]},
     )
