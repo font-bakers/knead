@@ -11,8 +11,10 @@ diff tmp0 tmp1 > /dev/null
 if [ $? -eq 1 ]
 then
     echo "Test failed from ttf to ttx."
-    rm tmp0 tmp1
+    rm tmp*
     exit 1
+else
+    echo "Success!"
 fi
 
 # Convert ttx to json. Rehash, and if data/ differs, test fail.
@@ -22,9 +24,11 @@ diff tmp0 tmp2 > /dev/null
 if [ $? -eq 1 ]
 then
     echo "Test failed from ttf to ttx."
-    rm tmp0 tmp2
+    rm tmp*
     exit 1
+else
+    echo "Success!"
 fi
 
 # Remove temporary files.
-rm tmp0 tmp1 tmp2
+rm tmp*
