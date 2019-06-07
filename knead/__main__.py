@@ -53,7 +53,7 @@ def determine_conversions(input_format, output_format):
     return conversions
 
 
-def main(argv):
+def convert(argv):
     conversions = determine_conversions(FLAGS.input, FLAGS.output)
 
     for conversion in conversions:
@@ -61,7 +61,6 @@ def main(argv):
             convert = ttf_to_ttx
         elif conversion == "ttx_to_json":
             convert = ttx_to_json
-            pass
         elif conversion == "json_to_proto":
             pass
         elif conversion == "proto_to_samples":
@@ -71,5 +70,6 @@ def main(argv):
             convert(file_from, file_to)
 
 
-if __name__ == "__main__":
-    app.run(main)
+def main():
+    """ Main entry point of knead. """
+    app.run(convert)
