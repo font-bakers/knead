@@ -246,4 +246,4 @@ def ttx_to_json(file_from, file_to):
             get_contours(glyph, glyph_name, curves, font_file, em_value)
 
     with open(file_to, "w+") as f:
-        json.dump(curves, f)
+        json.dump(curves, f, sort_keys=True, indent=4)
