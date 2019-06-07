@@ -18,7 +18,7 @@ fi
 # Convert ttx to json. Rehash, and if hashes differ, fail test.
 python main.py --input ttx --output json --directory ../data/
 HASH2=$(find ../data/ -type f -exec shasum {} \;)
-if [ "$HASH1" != "$HASH2" ]
+if [ "$HASH0" != "$HASH2" ]
 then
     echo "Test failed from ttx to json."
     exit 1
