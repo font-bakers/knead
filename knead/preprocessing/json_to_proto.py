@@ -1,3 +1,7 @@
+import sys
+from knead.utils import font_pb2, CHARACTER_SET
+
+
 def not_repeat(glyph, font_dict):
     """
     Returns False when a lowercase glyph is a copy of the uppercase glyph from
@@ -23,7 +27,7 @@ def not_repeat(glyph, font_dict):
     return True
 
 
-def pkl2protos(protoDir, pickleName, fileNum):
+def pkl2protos(proto_dir, pickle_name, file_num):
     """
     This function takes one pickle and proto directory and puts all of its
     glyphs into protos in the proto dir
@@ -35,16 +39,16 @@ def pkl2protos(protoDir, pickleName, fileNum):
     pickle: the location of the pickle to be put into protos
     """
     try:
-        with open(pickleName, "rb") as fontString:
-            fontDict = pickle.load(fontString)
-            for glyph in fontDict:
+        with open(pickle_name, "rb") as font_string:
+            font_dict = pickle.load(font_string)
+            for glyph in font_dict:
                 # basically we are going to flatten everything into just an
                 # array of points.
                 # we will keep track of the location of where each contour stops
                 # so we can reconstruct on the other end.
                 proto = font_pb2.glyph()
-                if glyph in CHARS and notRepeat(glyph, fontDict):
-                    contours = fontDict[glyph]
+                if glyph in CHARACTER_SET and not_repeat(glyph, font_dict):
+                    contours = font_dict[glyph]
                     num_contours = len(contours)
                     points = []
                     contour_locations = []
@@ -54,20 +58,20 @@ def pkl2protos(protoDir, pickleName, fileNum):
                             for point in curve:
                                 points += point
                     # write it in
-                    newGlyph = proto.glyph.add()
-                    newGlyph.num_contours = num_contours
+                    new_glyph = proto.glyph.add()
+                    new_glyph.num_contours = num_contours
                     points = list(points)
-                    newGlyph.bezier_points.extend(points)
-                    newGlyph.contour_locations.extend(contour_locations)
-                    newGlyph.font_name = pickleName
-                    newGlyph.glyph_name = glyph
+                    new_glyph.bezier_points.extend(points)
+                    new_glyph.contour_locations.extend(contour_locations)
+                    new_glyph.font_name = pickle_name
+                    new_glyph.glyph_name = glyph
 
                     # save it up
-                    with open("{}/{}{}".format(protoDir, glyph, fileNum), "ab") as f:
+                    with open("{}/{}{}".format(proto_dir, glyph, file_num), "ab") as f:
                         f.write(proto.SerializeToString())
 
-    except Exception as E:
-        print(pickleName, E, sys.exc_info()[0])
+    except Exception as err:
+        print(pickle_name, err, sys.exc_info()[0])
 
 
 def json_to_proto(file_from, file_to):
