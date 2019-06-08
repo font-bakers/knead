@@ -2,7 +2,7 @@
 
 from absl import flags, app
 from tqdm import tqdm
-from knead.preprocessing import ttf_to_ttx, ttx_to_json
+from knead.preprocessing import ttf_to_ttx, ttx_to_json, json_to_proto
 from knead.utils import get_filenames
 
 
@@ -62,7 +62,7 @@ def convert(argv):
         elif conversion == "ttx_to_json":
             convert = ttx_to_json
         elif conversion == "json_to_proto":
-            pass
+            convert = json_to_proto
         elif conversion == "proto_to_samples":
             pass
 
