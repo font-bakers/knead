@@ -57,6 +57,8 @@ def convert(argv):
     conversions = determine_conversions(FLAGS.input, FLAGS.output)
 
     for conversion in conversions:
+        print("Converting {} to {}...".format(*conversion.split("_to_")))
+
         if conversion == "ttf_to_ttx":
             convert = ttf_to_ttx
         elif conversion == "ttx_to_json":
@@ -68,6 +70,8 @@ def convert(argv):
 
         for file_from, file_to in tqdm(get_filenames(FLAGS.directory, conversion)):
             convert(file_from, file_to)
+
+        print()  # Print new lint
 
 
 def main():
