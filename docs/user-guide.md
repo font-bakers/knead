@@ -5,12 +5,14 @@
 The workflow of the font bakers looks something like this block diagram:
 
 ```
-REAL FONTS  -->  MACHINE LEARNING  -->  GENERATED FONTS  -->  VISUALIZATION
+------------------       ------------------------      -----------------------
+|   REAL FONTS   | --->  |   MACHINE LEARNING   | ---> |   GENERATED FONTS   |
+------------------       ------------------------      -----------------------
 ```
 
-`knead` targets the first arrow and last block: that is,
+`knead` targets the first and last blocks: that is,
 
-1. data preprocessing into some machine-learning-ready format, and
+1. preprocessing raw fonts into a machine-learning-ready format, and
 2. visualization of generated glyphs.
 
 ## Data Preprocessing
