@@ -29,7 +29,7 @@ def not_repeat(glyph, font_dict):
 
 
 def json_to_proto(file_from, file_to):
-    with open(file_from, "rb") as f:
+    with open(file_from, "r") as f:
         font_dict = json.load(f)
 
         for glyph in font_dict:
