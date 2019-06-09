@@ -34,3 +34,17 @@ else
     echo "Success from ttx to json!"
 fi
 echo
+
+# Convert json to proto. Rehash, and if hashes differ, fail test.
+knead --input json --output proto --directory data/
+HASH3=$(find data/ -type f -exec shasum {} \;)
+echo "ttx to json hash:"
+echo $HASH3
+if [ "$HASH0" != "$HASH3" ]
+then
+    echo "Test failed from json to proto."
+    exit 1
+else
+    echo "Success from json to proto!"
+fi
+echo
