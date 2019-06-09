@@ -7,7 +7,7 @@ import knead
 
 FLAGS = flags.FLAGS
 DATA_PIPELINE = ["ttf", "ttx", "json", "proto", "samples"]
-LOG_LEVELS = ["debug", "info"]
+LOG_LEVELS = ["debug", "info", "warning", "error", "critical"]
 
 flags.DEFINE_enum("input", None, DATA_PIPELINE, "Input data format.")
 flags.mark_flag_as_required("input")
@@ -93,17 +93,17 @@ def convert(argv):
                 num_conversions += 1
             except:
                 logger.debug(
-                    "Exception while converting {} to {}:".format(file_from, file_to),
+                    "Failed to convert {} to {}:".format(file_from, file_to),
                     exc_info=True,
                 )
                 num_exceptions += 1
 
-        msg = "Successfully converted {} ({:.2f}%) {} files. See log file for details.\n".format(
+        msg = "Successfully converted {} ({:.2f}%) {} file(s). See log file for details.\n".format(
             num_conversions,
             100 * num_conversions / (num_conversions + num_exceptions),
             conversion.split("_to_")[0],
         )
-        logger.info(msg)
+        print(msg)
 
 
 def main():
