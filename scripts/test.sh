@@ -34,3 +34,8 @@ else
     echo "Success from ttx to json!"
 fi
 echo
+
+# Protobufs change upon every write, so we cannot check correctness by hashing.
+# The next best thing is to merely convert json to proto and check that nothing
+# fails.
+knead --input json --output proto --directory data/

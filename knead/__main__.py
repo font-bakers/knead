@@ -2,7 +2,7 @@
 
 from absl import flags, app
 from tqdm import tqdm
-from knead.preprocessing import ttf_to_ttx, ttx_to_json
+import knead
 from knead.utils import get_filenames
 
 
@@ -57,17 +57,21 @@ def convert(argv):
     conversions = determine_conversions(FLAGS.input, FLAGS.output)
 
     for conversion in conversions:
+        print("Converting {} to {}...".format(*conversion.split("_to_")))
+
         if conversion == "ttf_to_ttx":
-            convert = ttf_to_ttx
+            convert = knead.preprocessing.ttf_to_ttx
         elif conversion == "ttx_to_json":
-            convert = ttx_to_json
+            convert = knead.preprocessing.ttx_to_json
         elif conversion == "json_to_proto":
-            pass
+            convert = knead.preprocessing.json_to_proto
         elif conversion == "proto_to_samples":
-            pass
+            convert = None
 
         for file_from, file_to in tqdm(get_filenames(FLAGS.directory, conversion)):
             convert(file_from, file_to)
+
+        print()  # Print new line
 
 
 def main():
