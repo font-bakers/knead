@@ -8,4 +8,4 @@ def ttf_to_ttx(file_from, file_to):
     )
 
     if return_code != 0:
-        raise RuntimeError("Failed to convert {}.".format(file_from))
+        raise RuntimeError("fonttools ttx utility failed on {}.".format(file_from))

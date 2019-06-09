@@ -15,7 +15,7 @@ flags.DEFINE_enum("output", None, DATA_PIPELINE, "Output data format.")
 flags.mark_flag_as_required("output")
 flags.DEFINE_string("directory", None, "Directory.")
 flags.mark_flag_as_required("directory")
-flags.DEFINE_enum("loglevel", "info", LOG_LEVELS, "Logging level.")
+flags.DEFINE_enum("loglevel", "critical", LOG_LEVELS, "Logging level.")
 
 
 def setup_logging():
@@ -75,7 +75,7 @@ def determine_conversions(input_format, output_format):
     return conversions
 
 
-def convert(argv):
+def knead(argv):
     logger = setup_logging()
     conversions = determine_conversions(FLAGS.input, FLAGS.output)
 
@@ -92,9 +92,8 @@ def convert(argv):
                 convert(file_from, file_to)
                 num_conversions += 1
             except:
-                logger.debug(
-                    "Failed to convert {} to {}:".format(file_from, file_to),
-                    exc_info=True,
+                logger.exception(
+                    "Failed to convert {} to {}:".format(file_from, file_to)
                 )
                 num_exceptions += 1
 
@@ -108,4 +107,4 @@ def convert(argv):
 
 def main():
     """ Main entry point of knead. """
-    app.run(convert)
+    app.run(knead)
