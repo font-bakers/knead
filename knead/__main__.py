@@ -20,6 +20,8 @@ flags.DEFINE_enum("loglevel", "critical", LOG_LEVELS, "Logging level.")
 
 def setup_logging():
     logger = logging.getLogger("knead")
+    logger.setLevel(logging.DEBUG)
+    logger.propagate = False
 
     file_handler = logging.FileHandler("knead.log")
     file_handler.setLevel(logging.DEBUG)  # Lowest logging level.
