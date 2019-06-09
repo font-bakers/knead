@@ -50,3 +50,6 @@ check: lint test  # Alias for `make lint test`.
 
 black:  # Format code in-place with black.
 	black knead/ --target-version=py35 --exclude=font_pb2.py
+
+clean:  # Clean root directory.
+	rm -rf site/ knead.egg-info/ *.log
