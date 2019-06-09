@@ -1,13 +1,13 @@
 #!/bin/python
 
+import logging
 from absl import flags, app
 from tqdm import tqdm
 import knead
-from knead.utils import get_filenames
-
 
 FLAGS = flags.FLAGS
 DATA_PIPELINE = ["ttf", "ttx", "json", "proto", "samples"]
+LOG_LEVELS = ["debug", "info"]
 
 flags.DEFINE_enum("input", None, DATA_PIPELINE, "Input data format.")
 flags.mark_flag_as_required("input")
@@ -15,6 +15,28 @@ flags.DEFINE_enum("output", None, DATA_PIPELINE, "Output data format.")
 flags.mark_flag_as_required("output")
 flags.DEFINE_string("directory", None, "Directory.")
 flags.mark_flag_as_required("directory")
+flags.DEFINE_enum("loglevel", "info", LOG_LEVELS, "Logging level.")
+
+
+def setup_logging():
+    logger = logging.getLogger("knead")
+
+    file_handler = logging.FileHandler("knead.log")
+    file_handler.setLevel(logging.DEBUG)  # Lowest logging level.
+
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(getattr(logging, FLAGS.loglevel.upper(), None))
+
+    formatter = logging.Formatter(
+        "%(asctime)s - %(levelname)s - %(message)s", datefmt="%m/%d/%Y %I:%M:%S %p"
+    )
+    file_handler.setFormatter(formatter)
+    console_handler.setFormatter(formatter)
+
+    logger.addHandler(file_handler)
+    logger.addHandler(console_handler)
+
+    return logger
 
 
 def determine_conversions(input_format, output_format):
@@ -54,24 +76,34 @@ def determine_conversions(input_format, output_format):
 
 
 def convert(argv):
+    logger = setup_logging()
     conversions = determine_conversions(FLAGS.input, FLAGS.output)
 
     for conversion in conversions:
         print("Converting {} to {}...".format(*conversion.split("_to_")))
+        convert = getattr(knead.preprocessing, conversion, None)
 
-        if conversion == "ttf_to_ttx":
-            convert = knead.preprocessing.ttf_to_ttx
-        elif conversion == "ttx_to_json":
-            convert = knead.preprocessing.ttx_to_json
-        elif conversion == "json_to_proto":
-            convert = knead.preprocessing.json_to_proto
-        elif conversion == "proto_to_samples":
-            convert = None
+        num_conversions = 0
+        num_exceptions = 0
+        for file_from, file_to in tqdm(
+            knead.utils.get_filenames(FLAGS.directory, conversion)
+        ):
+            try:
+                convert(file_from, file_to)
+                num_conversions += 1
+            except:
+                logger.debug(
+                    "Exception while converting {} to {}:".format(file_from, file_to),
+                    exc_info=True,
+                )
+                num_exceptions += 1
 
-        for file_from, file_to in tqdm(get_filenames(FLAGS.directory, conversion)):
-            convert(file_from, file_to)
-
-        print()  # Print new line
+        msg = "Successfully converted {} ({:.2f}%) {} files. See log file for details.\n".format(
+            num_conversions,
+            100 * num_conversions / (num_conversions + num_exceptions),
+            conversion.split("_to_")[0],
+        )
+        logger.info(msg)
 
 
 def main():
