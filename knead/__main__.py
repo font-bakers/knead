@@ -75,7 +75,7 @@ def determine_conversions(input_format, output_format):
     return conversions
 
 
-def knead(argv):
+def convert(argv):
     logger = setup_logging()
     conversions = determine_conversions(FLAGS.input, FLAGS.output)
 
@@ -107,4 +107,4 @@ def knead(argv):
 
 def main():
     """ Main entry point of knead. """
-    app.run(knead)
+    app.run(convert)
