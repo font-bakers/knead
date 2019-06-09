@@ -17,13 +17,13 @@ init:
 
 venv:
 	@printf "Creating Python virtual environment...\n"
-	rm -rf ${VENV_PATH}
+	rm -rf knead.egg-info/ ${VENV_PATH}
 	${SHELL} scripts/setup_venv.sh ${PYTHON} ${VENV_PATH} requirements.txt
 	@printf "\n\nVirtual environment created! \033[1;34mRun \`source venv/bin/activate\` to activate it.\033[0m\n\n\n"
 
 venv-develop:
 	@printf "Creating Python virtual environment for development...\n"
-	rm -rf ${VENV_PATH}
+	rm -rf knead.egg-info/ ${VENV_PATH}
 	${SHELL} scripts/setup_venv.sh ${PYTHON} ${VENV_PATH} requirements-dev.txt
 	@printf "\n\nVirtual environment created! \033[1;34mRun \`source venv/bin/activate\` to activate it.\033[0m\n\n\n"
 
@@ -52,4 +52,4 @@ black:  # Format code in-place with black.
 	black knead/ --target-version=py35 --exclude=font_pb2.py
 
 clean:  # Clean root directory.
-	rm -rf site/ knead.egg-info/ *.log
+	rm -rf site/ *.log
