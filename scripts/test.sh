@@ -35,16 +35,7 @@ else
 fi
 echo
 
-# Convert json to proto. Rehash, and if hashes differ, fail test.
+# Protobufs change upon every write, so we cannot check correctness by hashing.
+# The next best thing is to merely convert json to proto and check that nothing
+# fails.
 knead --input json --output proto --directory data/
-HASH3=$(find data/ -type f -exec shasum {} \;)
-echo "ttx to json hash:"
-echo $HASH3
-if [ "$HASH0" != "$HASH3" ]
-then
-    echo "Test failed from json to proto."
-    exit 1
-else
-    echo "Success from json to proto!"
-fi
-echo
