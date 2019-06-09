@@ -50,7 +50,7 @@ def json_to_proto(file_from, file_to):
                             points += point
 
                 # Write it in
-                new_glyph = proto.glyph.add()
+                new_glyph = proto.glyph.add()  # pylint: disable=E1101
                 new_glyph.num_contours = len(contours)
                 points = list(points)
                 new_glyph.bezier_points.extend(points)
