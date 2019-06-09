@@ -1,4 +1,5 @@
-import sys
+import os
+import json
 from knead.utils import font_pb2, CHARACTER_SET
 
 
@@ -27,52 +28,36 @@ def not_repeat(glyph, font_dict):
     return True
 
 
-def pkl2protos(proto_dir, pickle_name, file_num):
-    """
-    This function takes one pickle and proto directory and puts all of its
-    glyphs into protos in the proto dir
-
-    Parameters
-    ----------
-    proto_dir: the directory where all the protos should be saved
-
-    pickle: the location of the pickle to be put into protos
-    """
-    try:
-        with open(pickle_name, "rb") as font_string:
-            font_dict = pickle.load(font_string)
-            for glyph in font_dict:
-                # basically we are going to flatten everything into just an
-                # array of points.
-                # we will keep track of the location of where each contour stops
-                # so we can reconstruct on the other end.
-                proto = font_pb2.glyph()
-                if glyph in CHARACTER_SET and not_repeat(glyph, font_dict):
-                    contours = font_dict[glyph]
-                    num_contours = len(contours)
-                    points = []
-                    contour_locations = []
-                    for _, c in contours.items():
-                        contour_locations.append(len(c))
-                        for curve in c:
-                            for point in curve:
-                                points += point
-                    # write it in
-                    new_glyph = proto.glyph.add()
-                    new_glyph.num_contours = num_contours
-                    points = list(points)
-                    new_glyph.bezier_points.extend(points)
-                    new_glyph.contour_locations.extend(contour_locations)
-                    new_glyph.font_name = pickle_name
-                    new_glyph.glyph_name = glyph
-
-                    # save it up
-                    with open("{}/{}{}".format(proto_dir, glyph, file_num), "ab") as f:
-                        f.write(proto.SerializeToString())
-
-    except Exception as err:
-        print(pickle_name, err, sys.exc_info()[0])
-
-
 def json_to_proto(file_from, file_to):
-    pass
+    with open(file_from, "rb") as f:
+        font_dict = json.load(f)
+
+        for glyph in font_dict:
+            # Basically we are going to flatten everything into just an
+            # array of points. We will keep track of the location of where each
+            # contour stops so we can reconstruct on the other end.
+            proto = font_pb2.glyph()
+
+            if glyph in CHARACTER_SET and not_repeat(glyph, font_dict):
+                contours = font_dict[glyph]
+                points = []
+                contour_locations = []
+
+                for _, contour in contours.items():
+                    contour_locations.append(len(contour))
+                    for curve in contour:
+                        for point in curve:
+                            points += point
+
+                # Write it in
+                new_glyph = proto.glyph.add()
+                new_glyph.num_contours = len(contours)
+                points = list(points)
+                new_glyph.bezier_points.extend(points)
+                new_glyph.contour_locations.extend(contour_locations)
+                new_glyph.font_name = os.path.split(file_to)[-1]
+                new_glyph.glyph_name = glyph
+
+                # Save it up
+                with open(file_to, "ab+") as f:
+                    f.write(proto.SerializeToString())
