@@ -71,7 +71,7 @@ def convert(argv):
         for file_from, file_to in tqdm(get_filenames(FLAGS.directory, conversion)):
             convert(file_from, file_to)
 
-        print()  # Print new lint
+        print()  # Print new line
 
 
 def main():
