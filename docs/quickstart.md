@@ -34,4 +34,4 @@ a `knead.log` file.
 
 Optional flags may be added later, as required (e.g. whether or not to normalize
 coordinates by the em box size, how much to pad by, the number of glyphs per
-proto, etc.). 
+proto, etc.).
