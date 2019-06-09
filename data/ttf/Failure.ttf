@@ -1,0 +1,4 @@
+This file is a malformed .ttf file, and will raise some exception while being
+converted to a .ttx file.
+
+This will test if knead will swallow the exception and log it.
