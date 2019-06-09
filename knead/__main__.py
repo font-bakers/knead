@@ -1,5 +1,6 @@
 #!/bin/python
 
+import os
 import logging
 from absl import flags, app
 from tqdm import tqdm
@@ -85,6 +86,16 @@ def convert(argv):
         print("Converting {} to {}...".format(*conversion.split("_to_")))
         convert = getattr(knead.preprocessing, conversion, None)
 
+        # Check that directories exist.
+        dir_from = os.path.join(FLAGS.directory, conversion.split("_to_")[0])
+        dir_to = os.path.join(FLAGS.directory, conversion.split("_to_")[-1])
+        if not os.path.exists(dir_from):
+            raise RuntimeError("{} does not exist.".format(dir_from))
+        if not os.path.exists(dir_to):
+            os.mkdir(dir_to)
+
+        # Run all data conversions, counting successful conversions and logging
+        # any errors,
         num_conversions = 0
         num_exceptions = 0
         for file_from, file_to in tqdm(
