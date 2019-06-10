@@ -1,4 +1,4 @@
-.PHONY: help init venv venv-develop develop lint-black lint-pylint lint test check black
+.PHONY: help init venv venv-develop develop lint-black lint-pylint lint test check black clean
 .DEFAULT_GOAL = help
 
 PYTHON = python3
@@ -42,7 +42,7 @@ lint-pylint:
 lint: lint-black lint-pylint  # Check code style with black and pylint.
 
 test: clean  # Run tests.
-	@printf "Checking code...\n"
+	@printf "Running test script...\n"
 	bash scripts/test.sh
 	@printf "\033[1;34mTests pass!\033[0m\n\n"
 
@@ -51,7 +51,7 @@ check: clean lint test  # Alias for `make clean lint test`.
 black:  # Format code in-place with black.
 	black knead/ --target-version=py35 --exclude=font_pb2.py
 
-clean:  # Clean knead/ directory.
+clean:  # Clean project directories.
 	rm -rf site/ __pycache__/ *.log data/proto/
 	find knead/ -type d -name "__pycache__" -delete
 	find knead/ -type f \( -name "*.pyc" -o -name "*.log" \) -delete
