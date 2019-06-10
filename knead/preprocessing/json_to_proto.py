@@ -75,9 +75,7 @@ def json_to_proto(file_from, file_to):
             contours = font_dict[character]
             contour_locations = []
 
-            # FIXME This is technically unsafe... dictionaries need not be
-            # sorted!
-            for contour in contours.values():
+            for contour in contours:
                 contour_locations.append(len(contour))
                 points = list(chain.from_iterable(chain.from_iterable(contour)))
 
