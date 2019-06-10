@@ -39,3 +39,14 @@ echo
 # The next best thing is to merely convert json to proto and check that nothing
 # fails.
 knead --input json --output proto --directory data/
+NUMPROTOS=$(ls -1 data/proto | wc -l)
+echo "Number of protos created:"
+echo $NUMPROTOS
+if [ $NUMPROTOS != 70 ]
+then
+    echo "Test failed from json to proto."
+    exit 1
+else
+    echo "Success from json to proto!"
+fi
+echo
