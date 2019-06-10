@@ -46,7 +46,7 @@ test: clean  # Run tests.
 	bash scripts/test.sh
 	@printf "\033[1;34mTests pass!\033[0m\n\n"
 
-check: clean lint test  # Alias for `make lint test clean`.
+check: clean lint test  # Alias for `make clean lint test`.
 
 black:  # Format code in-place with black.
 	black knead/ --target-version=py35 --exclude=font_pb2.py
