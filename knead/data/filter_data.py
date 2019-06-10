@@ -1,4 +1,4 @@
-#/bin/python
+# /bin/python
 
 import glob
 import font_pb2
@@ -9,7 +9,7 @@ from tqdm import tqdm
 
 def read(buf, max_num_pts_per_contour):
     glyph_proto = font_pb2.glyph()
-    glyph_proto.ParseFromString(open(buf, 'rb').read())
+    glyph_proto.ParseFromString(open(buf, "rb").read())
     glyph = glyph_proto.glyph[0]
     num_pts_per_contour = glyph.contour_locations
 
@@ -22,6 +22,6 @@ def read(buf, max_num_pts_per_contour):
         return ""
 
 
-passing = list(filter(None, [read(a, 60) for a in glob.glob('./allas/*')]))
+passing = list(filter(None, [read(a, 60) for a in glob.glob("./allas/*")]))
 
 [copy(p, "./filteredas/") for p in tqdm(passing)]
