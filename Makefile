@@ -41,17 +41,17 @@ lint-pylint:
 
 lint: lint-black lint-pylint  # Check code style with black and pylint.
 
-test:  # Run tests.
+test: clean  # Run tests.
 	@printf "Checking code...\n"
 	bash scripts/test.sh
 	@printf "\033[1;34mTests pass!\033[0m\n\n"
 
-check: lint test  # Alias for `make lint test`.
+check: clean lint test  # Alias for `make lint test clean`.
 
 black:  # Format code in-place with black.
 	black knead/ --target-version=py35 --exclude=font_pb2.py
 
 clean:  # Clean knead/ directory.
-	rm -rf site/ __pycache__/ *.log
+	rm -rf site/ __pycache__/ *.log data/proto/
 	find knead/ -type d -name "__pycache__" -delete
 	find knead/ -type f \( -name "*.pyc" -o -name "*.log" \) -delete
