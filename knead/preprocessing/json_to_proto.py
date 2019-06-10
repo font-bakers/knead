@@ -32,32 +32,35 @@ def json_to_proto(file_from, file_to):
     with open(file_from, "r") as f:
         font_dict = json.load(f)
 
-        for glyph in font_dict:
-            # Basically we are going to flatten everything into just an
-            # array of points. We will keep track of the location of where each
-            # contour stops so we can reconstruct on the other end.
-            proto = font_pb2.glyph()
+    for glyph in font_dict:
+        # Basically we are going to flatten everything into just an
+        # array of points. We will keep track of the location of where each
+        # contour stops so we can reconstruct on the other end.
+        proto = font_pb2.glyph()
 
-            if glyph in CHARACTER_SET and not_repeat(glyph, font_dict):
-                contours = font_dict[glyph]
-                points = []
-                contour_locations = []
+        if glyph in CHARACTER_SET and not_repeat(glyph, font_dict):
+            contours = font_dict[glyph]
+            points = []
+            contour_locations = []
 
-                for _, contour in contours.items():
-                    contour_locations.append(len(contour))
-                    for curve in contour:
-                        for point in curve:
-                            points += point
+            for _, contour in contours.items():
+                contour_locations.append(len(contour))
+                for curve in contour:
+                    for point in curve:
+                        points += point
 
-                # Write it in
-                new_glyph = proto.glyph.add()  # pylint: disable=E1101
-                new_glyph.num_contours = len(contours)
-                points = list(points)
-                new_glyph.bezier_points.extend(points)
-                new_glyph.contour_locations.extend(contour_locations)
-                new_glyph.font_name = os.path.split(file_to)[-1]
-                new_glyph.glyph_name = glyph
+            # Write it in
+            new_glyph = proto.glyph.add()  # pylint: disable=E1101
+            new_glyph.num_contours = len(contours)
+            points = list(points)
+            new_glyph.bezier_points.extend(points)
+            new_glyph.contour_locations.extend(contour_locations)
+            new_glyph.font_name = os.path.split(file_to)[-1]
+            new_glyph.glyph_name = glyph
 
-                # Save it up
-                with open(file_to, "ab+") as f:
-                    f.write(proto.SerializeToString())
+            # Save each glyph as a separate proto
+            fst, snd = os.path.splitext(file_to)
+            file_to_with_glyph = fst + "." + glyph + snd
+
+            with open(file_to_with_glyph, "ab+") as f:
+                f.write(proto.SerializeToString())
