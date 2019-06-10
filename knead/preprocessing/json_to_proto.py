@@ -1,5 +1,6 @@
 import os
 import json
+from itertools import chain
 from knead.utils import font_pb2, CHARACTER_SET
 
 
@@ -40,14 +41,13 @@ def json_to_proto(file_from, file_to):
 
         if glyph in CHARACTER_SET and not_repeat(glyph, font_dict):
             contours = font_dict[glyph]
-            points = []
             contour_locations = []
 
-            for _, contour in contours.items():
+            # FIXME This is technically unsafe... dictionaries need not be
+            # sorted!
+            for contour in contours.values():
                 contour_locations.append(len(contour))
-                for curve in contour:
-                    for point in curve:
-                        points += point
+                points = list(chain.from_iterable(chain.from_iterable(contour)))
 
             # Write it in
             new_glyph = proto.glyph.add()  # pylint: disable=E1101
