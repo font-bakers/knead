@@ -90,8 +90,7 @@ def json_to_proto(file_from, file_to):
             new_glyph.font_name = os.path.split(file_to)[-1]
             new_glyph.glyph_name = character
 
-            file_to_with_glyph = format_file_with_character(file_to, character)
-
             # Save each character as a separate proto
+            file_to_with_glyph = format_file_with_character(file_to, character)
             with open(file_to_with_glyph, "ab+") as f:
                 f.write(proto.SerializeToString())
