@@ -1,7 +1,39 @@
 import os
 import json
 from itertools import chain
-from knead.utils import font_pb2, CHARACTER_SET
+from knead.utils import font_pb2, CHARACTER_SET, UPPERCASES, LOWERCASES
+
+
+def format_file_with_character(file_to, character):
+    """
+    Format the file path with an appropriately formatted character string. This
+    is necessary because some file systems are case sensitive by default, but
+    others are not: thus, writing to both a `Helvetica.A.proto` and
+    `Helvetica.a.proto` is not feasible.
+
+    Parameters
+    ----------
+    file_to : string
+        Path to file that is being written to. E.g. "data/Helvetica.proto"
+    character : string
+        Character that is being saved. E.g. "a"
+
+    Returns
+    -------
+    file_to_with_glyph : string
+        New path to file with properly formatted character.
+        E.g. "data/Helvetica.a_lower.proto"
+    """
+    if character in UPPERCASES:
+        formatted_character = character.upper() + "_upper"
+    elif character in LOWERCASES:
+        formatted_character = character.lower() + "_lower"
+    else:
+        formatted_character = character
+
+    root, extension = os.path.splitext(file_to)
+    file_to_with_glyph = root + "." + formatted_character + extension
+    return file_to_with_glyph
 
 
 def not_repeat(glyph, font_dict):
@@ -33,14 +65,14 @@ def json_to_proto(file_from, file_to):
     with open(file_from, "r") as f:
         font_dict = json.load(f)
 
-    for glyph in font_dict:
+    for character in font_dict:
         # Basically we are going to flatten everything into just an
         # array of points. We will keep track of the location of where each
         # contour stops so we can reconstruct on the other end.
         proto = font_pb2.glyph()
 
-        if glyph in CHARACTER_SET and not_repeat(glyph, font_dict):
-            contours = font_dict[glyph]
+        if character in CHARACTER_SET and not_repeat(character, font_dict):
+            contours = font_dict[character]
             contour_locations = []
 
             # FIXME This is technically unsafe... dictionaries need not be
@@ -56,11 +88,10 @@ def json_to_proto(file_from, file_to):
             new_glyph.bezier_points.extend(points)
             new_glyph.contour_locations.extend(contour_locations)
             new_glyph.font_name = os.path.split(file_to)[-1]
-            new_glyph.glyph_name = glyph
+            new_glyph.glyph_name = character
 
-            # Save each glyph as a separate proto
-            fst, snd = os.path.splitext(file_to)
-            file_to_with_glyph = fst + "." + glyph + snd
+            file_to_with_glyph = format_file_with_character(file_to, character)
 
+            # Save each character as a separate proto
             with open(file_to_with_glyph, "ab+") as f:
                 f.write(proto.SerializeToString())
