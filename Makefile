@@ -52,6 +52,6 @@ black:  # Format code in-place with black.
 	black knead/ --target-version=py35 --exclude=font_pb2.py
 
 clean:  # Clean knead/ directory.
-	rm -rf site/
+	rm -rf site/ __pycache__/ *.log
 	find knead/ -type d -name "__pycache__" -delete
 	find knead/ -type f \( -name "*.pyc" -o -name "*.log" \) -delete
