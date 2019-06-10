@@ -52,8 +52,7 @@ def not_repeat(glyph, font_dict):
         True if the glyph is not a repeat or is not a character we are checking
         False if the glyph is a repeat of its corresponnding uppercase
     """
-    lowercase = set("abcdefghijklmnopqrstuvwxyz")
-    if glyph in lowercase and glyph.upper() in font_dict:
+    if glyph in LOWERCASES and glyph.upper() in font_dict:
         lower_contours = font_dict[glyph]
         upper_contours = font_dict[glyph.upper()]
         if lower_contours == upper_contours:
@@ -75,9 +74,7 @@ def json_to_proto(file_from, file_to):
             contours = font_dict[character]
             contour_locations = []
 
-            # FIXME This is technically unsafe... dictionaries need not be
-            # sorted!
-            for contour in contours.values():
+            for contour in contours:
                 contour_locations.append(len(contour))
                 points = list(chain.from_iterable(chain.from_iterable(contour)))
 

@@ -225,10 +225,10 @@ def get_contours(glyph, glyph_name, curves, font_file, em_value):
         components = glyph.findall("component")
         for component in components:
             contours = contours + get_component_contours(component, font_file)
-    contour_dict = {}
-    for i, contour in enumerate(contours):
-        contour_dict[i] = get_curves(contour, em_value)
-    curves[glyph_name] = contour_dict
+    contour_list = []
+    for contour in contours:
+        contour_list.append(get_curves(contour, em_value))
+    curves[glyph_name] = contour_list
 
 
 def ttx_to_json(file_from, file_to):
@@ -240,10 +240,11 @@ def ttx_to_json(file_from, file_to):
     em_value = float(units_per_em.get("value"))
     curves = {}
     glyphs = font_file.findall(".//TTGlyph")
+
     for glyph in glyphs:
         glyph_name = glyph.get("name")
         if glyph_name in CHARACTER_SET:
             get_contours(glyph, glyph_name, curves, font_file, em_value)
 
     with open(file_to, "w+") as f:
-        json.dump(curves, f, sort_keys=True, indent=4)
+        json.dump(curves, f, sort_keys=True)
