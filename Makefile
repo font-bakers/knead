@@ -51,5 +51,7 @@ check: lint test  # Alias for `make lint test`.
 black:  # Format code in-place with black.
 	black knead/ --target-version=py35 --exclude=font_pb2.py
 
-clean:  # Clean root directory.
-	rm -rf site/ *.log
+clean:  # Clean knead/ directory.
+	rm -rf site/
+	find knead/ -type d -name "__pycache__" -delete
+	find knead/ -type f \( -name "*.pyc" -o -name "*.log" \) -delete
