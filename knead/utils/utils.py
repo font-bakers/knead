@@ -2,60 +2,11 @@ from os.path import join
 from glob import glob
 from re import sub
 
+UPPERCASES = set("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
-CHARACTER_SET = {
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-    "S",
-    "T",
-    "U",
-    "V",
-    "W",
-    "X",
-    "Y",
-    "Z",
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
+LOWERCASES = {character.lower() for character in UPPERCASES}
+
+NUMERALS = {
     "zero",
     "one",
     "two",
@@ -66,6 +17,9 @@ CHARACTER_SET = {
     "seven",
     "eight",
     "nine",
+}
+
+SPECIALS = {
     "exclam",
     "numbersign",
     "dollar",
@@ -75,6 +29,8 @@ CHARACTER_SET = {
     "question",
     "at",
 }
+
+CHARACTER_SET = UPPERCASES.union(LOWERCASES, NUMERALS, SPECIALS)
 
 _FILE_EXTENSIONS = {
     "ttf": ".ttf",
