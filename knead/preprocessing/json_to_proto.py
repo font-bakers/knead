@@ -77,6 +77,7 @@ def json_to_proto(file_from, file_to):
             for contour in contours:
                 contour_locations.append(len(contour))
                 points = list(chain.from_iterable(chain.from_iterable(contour)))
+                assert 6 * len(contour) == len(points)
 
             # Write it in
             new_glyph = proto.glyph.add()  # pylint: disable=E1101
