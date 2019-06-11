@@ -120,4 +120,3 @@ Thumbs.db
 
 # Protobuf test cases
 data/proto/*.proto
-data/npy/*.npy
