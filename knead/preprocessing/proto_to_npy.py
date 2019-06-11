@@ -1,6 +1,6 @@
 from collections import deque
-import numpy as np
 from absl import flags
+import numpy as np
 from knead.utils import font_pb2
 
 FLAGS = flags.FLAGS
@@ -55,8 +55,6 @@ def read(buf, max_num_points_in_contour, num_samples):
                 max_num_points_in_contour
             )
         )
-    if 6 * sum(num_points_in_contour) != len(bezier_points):
-        raise RuntimeError("Total lengths of contours do not match number of points.")
 
     contours = np.zeros((3, num_samples, 2), np.float32)
     for i, num_points in enumerate(num_points_in_contour):
