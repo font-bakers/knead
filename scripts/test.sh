@@ -50,3 +50,5 @@ else
     echo "Success from json to proto!"
 fi
 echo
+
+knead --input proto --output npy --directory data/
