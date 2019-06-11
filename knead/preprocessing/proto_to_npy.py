@@ -1,6 +1,9 @@
 from collections import deque
 import numpy as np
+from absl import flags
 from knead.utils import font_pb2
+
+FLAGS = flags.FLAGS
 
 
 # pylint: disable=R0914
@@ -35,51 +38,34 @@ def sample_quadratic_bezier(control_points, num_steps):
     return samples
 
 
-def read(buf, max_num_pts_in_contour, num_samples):
+def read(buf, max_num_points_in_contour, num_samples):
     glyph_proto = font_pb2.glyph()
-
     with open(buf, "rb") as f:
         glyph_proto.ParseFromString(f.read())
 
     glyph = glyph_proto.glyph[0]  # pylint: disable=E1101
     bezier_points = deque(glyph.bezier_points)
-    num_pts_in_contour = glyph.contour_locations
+    num_points_in_contour = glyph.contour_locations
 
-    if len(num_pts_in_contour) > 3:
+    if len(num_points_in_contour) > 3:
         raise RuntimeError("Glyph contains more than 3 contours.")
-    if max(num_pts_in_contour) > max_num_pts_in_contour:
+    if max(num_points_in_contour) > max_num_points_in_contour:
         raise RuntimeError(
             "Glyph contains contour with more than {} control points.".format(
-                max_num_pts_in_contour
+                max_num_points_in_contour
             )
         )
 
     contours = np.zeros((3, num_samples, 2), np.float32)
-
-    for i, num_pts in enumerate(num_pts_in_contour):
-        points = np.array([bezier_points.popleft() for _ in range(num_pts * 6)])
+    for i, num_points in enumerate(num_points_in_contour):
+        points = np.array([bezier_points.popleft() for _ in range(num_points * 6)])
         contour = points.reshape([-1, 6]).reshape(-1, 3, 2)
         contours[i] = sample_quadratic_bezier(contour, num_samples)
 
     return contours
 
 
-written = 0
-num_shards = 128
-num_samples = 640
-
-for a in tqdm(glob.glob("./filteredas/*")):
-    contours = read(a, 60, num_samples)
+def proto_to_npy(file_from, file_to):
+    contours = read(file_from, FLAGS.max_num_points_in_contour, FLAGS.num_samples)
     if contours is not None:
-        path = "with_{}_samples/{}/{}".format(
-            num_samples, written % num_shards, written
-        )
-        if not os.path.exists(os.path.dirname(path)):
-            os.makedirs(os.path.dirname(path))
-
-        np.save(path, contours, allow_pickle=False)
-        written += 1
-
-
-def proto_to_npy(file_to):
-    pass
+        np.save(file_to, contours, allow_pickle=False)
