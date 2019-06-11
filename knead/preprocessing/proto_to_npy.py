@@ -35,7 +35,7 @@ def sample_quadratic_bezier(control_points, num_steps):
     return samples
 
 
-def read(buf, max_num_pts_per_contour, num_samples):
+def read(buf, max_num_pts_in_contour, num_samples):
     glyph_proto = font_pb2.glyph()
 
     with open(buf, "rb") as f:
@@ -43,20 +43,22 @@ def read(buf, max_num_pts_per_contour, num_samples):
 
     glyph = glyph_proto.glyph[0]  # pylint: disable=E1101
     bezier_points = deque(glyph.bezier_points)
-    num_pts_per_contour = glyph.contour_locations
+    num_pts_in_contour = glyph.contour_locations
 
-    if (
-        (not num_pts_per_contour)
-        or (len(num_pts_per_contour) > 3)
-        or (max(num_pts_per_contour) > max_num_pts_per_contour)
-    ):
-        raise RuntimeError("Something bad happened")
+    if len(num_pts_in_contour) > 3:
+        raise RuntimeError("Glyph contains more than 3 contours.")
+    if max(num_pts_in_contour) > max_num_pts_in_contour:
+        raise RuntimeError(
+            "Glyph contains contour with more than {} control points.".format(
+                max_num_pts_in_contour
+            )
+        )
 
     contours = np.zeros((3, num_samples, 2), np.float32)
 
-    for i, num_pts in enumerate(num_pts_per_contour):
-        pts = np.array([bezier_points.popleft() for _ in range(num_pts * 6)])
-        contour = pts.reshape([-1, 6]).reshape(-1, 3, 2)
+    for i, num_pts in enumerate(num_pts_in_contour):
+        points = np.array([bezier_points.popleft() for _ in range(num_pts * 6)])
+        contour = points.reshape([-1, 6]).reshape(-1, 3, 2)
         contours[i] = sample_quadratic_bezier(contour, num_samples)
 
     return contours
