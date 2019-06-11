@@ -55,4 +55,3 @@ else
     echo "Success from proto to npy!"
 fi
 echo
-
