@@ -7,7 +7,7 @@ from tqdm import tqdm
 import knead
 
 FLAGS = flags.FLAGS
-DATA_PIPELINE = ["ttf", "ttx", "json", "proto", "samples"]
+DATA_PIPELINE = ["ttf", "ttx", "json", "proto", "npy"]
 LOG_LEVELS = ["debug", "info", "warning", "error", "critical"]
 
 flags.DEFINE_enum("input", None, DATA_PIPELINE, "Input data format.")
@@ -16,7 +16,21 @@ flags.DEFINE_enum("output", None, DATA_PIPELINE, "Output data format.")
 flags.mark_flag_as_required("output")
 flags.DEFINE_string("directory", None, "Directory.")
 flags.mark_flag_as_required("directory")
-flags.DEFINE_enum("loglevel", "critical", LOG_LEVELS, "Logging level.")
+flags.DEFINE_integer(
+    "num_samples",
+    640,
+    "Number of samples per Bezier curve. Defaults to 640.",
+    lower_bound=1,
+)
+flags.DEFINE_integer(
+    "max_num_points_in_contour",
+    60,
+    "Maximum number of control points to allow in each contour. Defaults to 60.",
+    lower_bound=3,
+)
+flags.DEFINE_enum(
+    "loglevel", "critical", LOG_LEVELS, "Logging level. Defaults to `logging.CRITICAL`."
+)
 
 
 def setup_logging():
