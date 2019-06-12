@@ -52,6 +52,13 @@ black:  # Format code in-place with black.
 	black knead/ --target-version=py35 --exclude=glyph_batch_pb2.py
 
 clean:  # Clean project directories.
-	rm -rf site/ __pycache__/ *.log data/proto/
+	rm -rf dist/ site/ __pycache__/ *.log data/proto/
 	find knead/ -type d -name "__pycache__" -delete
 	find knead/ -type f \( -name "*.pyc" -o -name "*.log" \) -delete
+
+release: clean  # Package and release knead to TestPyPI (requires credentials).
+	${PYTHON} setup.py sdist bdist_wheel
+	twine check dist/*
+	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+	# To actually upload to PyPI:
+	# twine upload dist/*

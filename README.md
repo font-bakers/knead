@@ -1,5 +1,5 @@
 <p align="center">
-<img src="docs/img/logo.png" alt="Knead logo" title="Knead logo" align="center"></img>
+<img src="https://raw.githubusercontent.com/font-bakers/knead/master/docs/img/logo.png" alt="Knead logo" title="Knead logo" align="center"></img>
 </p>
 
 [![Build Status](https://travis-ci.com/font-bakers/knead.svg?branch=master)](https://travis-ci.com/font-bakers/knead)
