@@ -67,6 +67,9 @@ twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 twine upload dist/*
 ```
 
+For more information, refer to the [Python packaging
+documentation](https://packaging.python.org/tutorials/packaging-projects/).
+
 ## Development details
 
 - `knead` adopts the [Semantic Versioning
