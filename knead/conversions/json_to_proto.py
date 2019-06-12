@@ -72,18 +72,18 @@ def json_to_proto(file_from, file_to):
 
         if character in CHARACTER_SET and not_repeat(character, font_dict):
             contours = font_dict[character]
-            contour_locations = []
+            num_points_in_contours = []
             points = []
 
             for contour in contours:
-                contour_locations.append(len(contour))
+                num_points_in_contours.append(len(contour))
                 points.extend(list(chain.from_iterable(chain.from_iterable(contour))))
 
             # Write it in
             new_glyph = proto.glyph.add()  # pylint: disable=E1101
             new_glyph.num_contours = len(contours)
             new_glyph.bezier_points.extend(points)
-            new_glyph.contour_locations.extend(contour_locations)
+            new_glyph.contour_locations.extend(num_points_in_contours)
             new_glyph.font_name = os.path.split(file_to)[-1]
             new_glyph.glyph_name = character
 
