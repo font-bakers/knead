@@ -27,6 +27,7 @@ with open(REQUIREMENTS_FILE) as f:
 
 CLASSIFIERS = [
     "Development Status :: 2 - Pre-Alpha",
+    "Environment :: Console",
     "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
     "Operating System :: OS Independent",
@@ -34,6 +35,7 @@ CLASSIFIERS = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.5",
     "Topic :: Scientific/Engineering",
+    "Text Processing :: Fonts",
 ]
 
 
