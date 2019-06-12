@@ -1,5 +1,7 @@
 # Quickstart
 
+For more information on how `knead` works, refer to the user guide.
+
 ## Installation
 
 The latest release of `knead` can be installed from PyPI:
@@ -75,17 +77,13 @@ data
 ```
 
 In the event of a fatal error during the data preprocessing, `knead` will simply
-swallow the exception and write the error message (along with a stack trace) to
-a `knead.log` file.
+catch the exception and write the error message (along with a stack trace) to a
+`knead.log` file.
 
 ## Optional Flags
 
-Optional flags default to some variable, and do 
-
-FILE THESE AS GITHUB ISSUES: 
-Optional flags may be added later, as required (e.g. whether or not to normalize
-coordinates by the em box size, how much to pad by, the number of glyphs per
-`.proto` file, etc.).
+Optional flags only matter if certain values are passed for the required flags
+(e.g.  if `--output npy` is passed), and always default to some value.
 
 1. `--num_samples`: The number of samples to evaluate per quadratic Bezier
    curve. Defaults to 640. Only relevant if `--output npy` is passed.

@@ -29,7 +29,7 @@ several `<contour>` definitions.
 In other words it defines a specific region of the font.
 
 Within each contour we have successive `<pt>` tags which define points. They
-include the $$x, y$$ location and whether the point is on curve or off curve.
+include the `x`, `y` location and whether the point is on curve or off curve.
 
 Now, there are some important rules on how to understand these points.
 
@@ -62,19 +62,32 @@ Under the hood, the data conversion pipeline looks like this:
 ----------      ----------     -----------     ------------     ----------
 ```
 
-Note that it is possible to run the data pipeline in reverse: e.g. we can
-convert `.ttx` files back to `.ttf` files, and it is theoretically possible to
-convert `.json` files back into `.ttx` files, etc. _This is currently not a
-development priority._
+Each conversion between two data formats (i.e. arrow between blocks) is
+explained in a different section below.
 
-Note also that `.ttf` is the only font file format currently supported: notably,
-`.otf` files are not supported.
+### `.ttf` to `.ttx`
 
-1. `.ttf` to `.ttx`:
+Uses the `fonttools` `ttx` command line utility.
 
-2. `.ttx` to `.json`:
+### `.ttx` to `.json`
 
-3. `.json` to `.proto`:
+Done by hand.
 
-4. `.proto` to `.npy`:
+### `.json` to `.proto`
 
+Protos are saved with `_upper` and `_lower` since some filesystems do not
+distinguish between uppercase and lowercase filenames.
+
+### `.proto` to `.npy`
+
+This _samples_ from the quadratic Bezier curves.
+
+## Notes
+
+- It is possible to run the data pipeline in reverse: e.g. we can convert `.ttx`
+  files back to `.ttf` files, and it is theoretically possible to convert
+  `.json` files back into `.ttx` files, etc. _This is currently not a
+  development priority._
+
+- `.ttf` is the only font file format currently supported: in particular, `.otf`
+  files are not supported.
