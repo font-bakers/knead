@@ -59,6 +59,10 @@ clean:  # Clean project directories.
 release: clean  # Package and release knead to TestPyPI (requires credentials).
 	${PYTHON} setup.py sdist bdist_wheel
 	twine check dist/*
-	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
-	# To actually upload to PyPI:
-	# twine upload dist/*
+	@printf "\n\n\033[1;34mTo upload to TestPyPI, run:\033[0m\n\n"
+	@printf "\033[1;34m\ttwine upload --repository-url https://test.pypi.org/legacy/ dist/*\033[0m\n\n"
+	@printf "\033[1;34mYou will need TestPyPI credentials.\033[0m\n\n"
+	@printf ""
+	@printf "\033[1;34mTo upload to PyPI, run:\033[0m\n\n"
+	@printf "\033[1;34m\ttwine upload dist/*\033[0m\n\n"
+	@printf "\033[1;34mYou will need PyPI credentials.\033[0m\n\n"

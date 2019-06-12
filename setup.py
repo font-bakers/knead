@@ -7,7 +7,11 @@ NAME = "knead"
 MAINTAINER = "The Font Bakers"
 DESCRIPTION = "A command line tool for preprocessing, manipulating and serializing font files for deep learning applications."
 LICENSE = "MIT"
-URL = "https://github.com/font-bakers/knead/"
+URL = "https://github.com/font-bakers/knead"
+PROJECT_URLS = {
+    "Issue Tracker": "https://github.com/font-bakers/knead/issues",
+    "Documentation": "https://font-bakers.github.io/knead/",
+}
 PYTHON_REQUIRES = ">=3.5.2"
 
 PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
@@ -61,6 +65,7 @@ if __name__ == "__main__":
         license=LICENSE,
         classifiers=CLASSIFIERS,
         url=URL,
+        project_urls=PROJECT_URLS,
         packages=find_packages(),
         python_requires=PYTHON_REQUIRES,
         install_requires=INSTALL_REQUIRES,
