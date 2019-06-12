@@ -48,9 +48,9 @@ There are some important rules on how to understand these points.
 Under the hood, the data conversion pipeline looks like this:
 
 ```
-----------      ----------     -----------     ------------     ----------
-|  .ttf  | -->  |  .ttx  | --> |  .json  | --> |  .proto  | --> |  .npy  |
-----------      ----------     -----------     ------------     ----------
+----------      ----------     -----------     ---------     ----------
+|  .ttf  | -->  |  .ttx  | --> |  .json  | --> |  .pb  | --> |  .npy  |
+----------      ----------     -----------     ---------     ----------
 ```
 
 Each conversion between two data formats is explained in a different section
@@ -69,12 +69,12 @@ Running `knead --input ttf --output ttx MyFont.ttf` is essentially a thin callth
 
 This is done in Python, following all the TrueType rules described above.
 
-### `.json` to `.proto`
+### `.json` to `.pb`
 
-Protos are saved with `_upper` and `_lower` since some filesystems do not
+`.pb` files are saved with `_upper` and `_lower` since some filesystems do not
 distinguish between uppercase and lowercase filenames.
 
-### `.proto` to `.npy`
+### `.pb` to `.npy`
 
 This samples from the quadratic Bezier curves.
 
