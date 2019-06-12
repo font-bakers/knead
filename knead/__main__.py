@@ -98,7 +98,7 @@ def convert(argv):
 
     for conversion in conversions:
         print("Converting {} to {}...".format(*conversion.split("_to_")))
-        convert = getattr(knead.preprocessing, conversion, None)
+        convert = getattr(knead.conversions, conversion, None)
 
         # Check that directories exist.
         dir_from = os.path.join(FLAGS.directory, conversion.split("_to_")[0])
