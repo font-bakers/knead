@@ -76,7 +76,7 @@ distinguish between uppercase and lowercase filenames.
 
 ### `.proto` to `.npy`
 
-This _samples_ from the quadratic Bezier curves.
+This samples from the quadratic Bezier curves.
 
 ## Notes
 
