@@ -1,37 +1,28 @@
 # User Guide
 
-## Bezier curves, glyphs and TrueType
+## Bezier curves and the TrueType standard
 
-Formally:
+Before explaining `knead`'s internals, it is necessary to introduce how vector
+typefaces are represented.
 
-- A typeface is composed of one or more fonts.
-- A font is composed of several glyphs.
-- A glyph is composed of one or more contours.
-- A contour is composed of several (quadratic) Bezier curves.
-- A Bezier curve is composed of three control points.
-- A control point is composed of an x and a y coordinate.
+1. A typeface is composed of one or more fonts.
+2. A font is composed of several glyphs.
+3. A glyph is composed of one or more (closed) contours.
+4. A contour is composed of several [(quadratic) Bezier
+   curves](https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Quadratic_B%C3%A9zier_curves).
+5. A (quadratic) Bezier curve is composed of exactly three control points.
+6. A control point is composed of an x and a y coordinate.
 
-INSERT IMAGE HERE.
+![Ampersand](img/ampersand.png)
 
-TTF stands for "TrueType Font", whereas TTX stands for "TrueType XML".
+In a `.ttx` (a.k.a. TrueType XML) file, each glyph is contained within a
+`<ttGlyph>` tag. This tag has several `<contour>` definitions.
 
-Here we will go over the basics of how TrueType represents a glyph.
+Within each contour we have successive `<pt>` tags which define control points.
+Each control point specifies its location (i.e., x and y coordinates) and
+whether the point is "on curve" or "off curve".
 
-In a TTX file each glyph is contained within a `<ttGlyph>` tag. This tag has
-several `<contour>` definitions.
-
-> "Each contour delimits an outer or inner region of the glyph, and can be made
-> of either line segments and/or second-order Beziers (also called "conic
-> Beziers" or "quadratics")."
->
-> - [_Glyph Hell_, David Turner](http://chanae.walon.org/pub/ttf/ttf_glyphs.htm)
-
-In other words it defines a specific region of the font.
-
-Within each contour we have successive `<pt>` tags which define points. They
-include the `x`, `y` location and whether the point is on curve or off curve.
-
-Now, there are some important rules on how to understand these points.
+There are some important rules on how to understand these points.
 
 1. If two successive points are "on" this means that they form a line.
 2. If three points are "on", "off", "on" then this defines a quadratic Bezier
@@ -62,16 +53,21 @@ Under the hood, the data conversion pipeline looks like this:
 ----------      ----------     -----------     ------------     ----------
 ```
 
-Each conversion between two data formats (i.e. arrow between blocks) is
-explained in a different section below.
+Each conversion between two data formats is explained in a different section
+below.
 
 ### `.ttf` to `.ttx`
 
-Uses the `fonttools` `ttx` command line utility.
+This conversion is handled by the `fonttools` `ttx` command line utility. For
+more information, refer to the [`fonttools`
+documentation](https://github.com/fonttools/fonttools#ttx--from-opentype-and-truetype-to-xml-and-back).
+
+Running `knead --input ttf --output ttx MyFont.ttf` is essentially a thin callthrough to
+`ttx -q -o MyFont.ttx MyFont.ttf`.
 
 ### `.ttx` to `.json`
 
-Done by hand.
+This is done in Python, following all the TrueType rules described above.
 
 ### `.json` to `.proto`
 
