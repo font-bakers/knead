@@ -29,29 +29,29 @@ else
 fi
 echo
 
-# Protobufs change upon every write, so we cannot check correctness by hashing.
-# The next best thing is to merely convert json to proto and check that nothing
-# fails.
-knead --input json --output proto --directory data/
-NUMPROTOS=$(ls -1 data/proto | wc -l)
-if [ $NUMPROTOS != 70 ]
+# Serialized protobuf output change upon every write, so we cannot check
+# correctness by hashing.  The next best thing is to merely convert json to pb
+# and check that nothing fails.
+knead --input json --output pb --directory data/
+NUMPBS=$(ls -1 data/pb | wc -l)
+if [ $NUMPBS != 70 ]
 then
-    echo "Test failed from json to proto."
+    echo "Test failed from json to pb."
     exit 1
 else
-    echo "Success from json to proto!"
+    echo "Success from json to pb!"
 fi
 echo
 
-# Convert proto to npy. Rehash, and if hashes differ, fail test.
-knead --input proto --output npy --directory data/
-rm -rf data/proto/  # Clean up after ourselves.
+# Convert pb to npy. Rehash, and if hashes differ, fail test.
+knead --input pb --output npy --directory data/
+rm -rf data/pb/  # Clean up after ourselves.
 HASH3=$(find data/ -type f -exec shasum {} \;)
 if [ "$HASH0" != "$HASH3" ]
 then
-    echo "Test failed from proto to npy."
+    echo "Test failed from pb to npy."
     exit 1
 else
-    echo "Success from proto to npy!"
+    echo "Success from pb to npy!"
 fi
 echo

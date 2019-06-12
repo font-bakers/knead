@@ -39,11 +39,11 @@ def sample_quadratic_bezier(control_points, num_steps):
 
 
 def read(buf, max_num_points_in_contour, num_samples):
-    proto = glyph_batch_pb2.Batch()
+    protobuf = glyph_batch_pb2.Batch()
     with open(buf, "rb") as f:
-        proto.ParseFromString(f.read())
+        protobuf.ParseFromString(f.read())
 
-    glyph = proto.glyphs[0]  # pylint: disable=E1101
+    glyph = protobuf.glyphs[0]  # pylint: disable=E1101
     bezier_points = deque(glyph.bezier_points)
     num_points_in_contours = glyph.num_points_in_contours
 
@@ -65,7 +65,7 @@ def read(buf, max_num_points_in_contour, num_samples):
     return contours
 
 
-def proto_to_npy(file_from, file_to):
+def pb_to_npy(file_from, file_to):
     contours = read(file_from, FLAGS.max_num_points_in_contour, FLAGS.num_samples)
     if contours is not None:
         np.save(file_to, contours, allow_pickle=False)
