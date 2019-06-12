@@ -7,7 +7,7 @@ from tqdm import tqdm
 import knead
 
 FLAGS = flags.FLAGS
-DATA_PIPELINE = ["ttf", "ttx", "json", "proto", "npy"]
+DATA_PIPELINE = ["ttf", "ttx", "json", "pb", "npy"]
 LOG_LEVELS = ["debug", "info", "warning", "error", "critical"]
 
 flags.DEFINE_enum("input", None, DATA_PIPELINE, "Input data format.")

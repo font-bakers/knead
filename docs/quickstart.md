@@ -31,7 +31,7 @@ knead --input INPUT_FORMAT --output OUTPUT_FORMAT --directory PATH/TO/DATA/
       the [`fonttools`
       documentation](https://github.com/fonttools/fonttools#ttx--from-opentype-and-truetype-to-xml-and-back).
     - `json`: a `.json` format of the font.
-    - `proto`: a `.proto` format of each glyph in each font.
+    - `pb`: a `.pb` serialized protobuf format of each glyph in each font.
     - `npy`: a `.npy` format of samples from quadratic Bezier curves in each
       glyph in each font.
 
@@ -63,10 +63,10 @@ data
 │   ├── Georgia.B_upper.npy
 │   ├── Georgia.C_upper.npy
 │   └── ...
-├── proto
-│   ├── Georgia.A_upper.proto
-│   ├── Georgia.B_upper.proto
-│   ├── Georgia.C_upper.proto
+├── pb
+│   ├── Georgia.A_upper.pb
+│   ├── Georgia.B_upper.pb
+│   ├── Georgia.C_upper.pb
 │   └── ...
 ├── ttf
 │   ├── Georgia.ttf

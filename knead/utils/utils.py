@@ -36,7 +36,7 @@ _FILE_EXTENSIONS = {
     "ttf": ".ttf",
     "ttx": ".ttx",
     "json": ".json",
-    "proto": ".proto",
+    "pb": ".pb",
     "npy": ".npy",
 }
 
