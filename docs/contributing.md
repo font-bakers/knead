@@ -37,9 +37,15 @@ format staged Python files in-place using `black`.
 
 ## Development details
 
-- `knead` targets Python 3.5+ compatibility.
+- `knead` follows the [Semantic Versioning
+  2.0.0](https://semver.org/#semantic-versioning-200) specification.
+- `knead` targets Python 3.5+ (specifically, 3.5.2+) compatibility.
 - `knead` uses `black` and `pylint` to format and lint code, respectively.
   - However, `black` requires Python 3.6+ to run. Thus, we test in Python 3.5
     but lint in Python 3.6. See our [Travis
     configuration](https://github.com/font-bakers/knead/blob/master/.travis.yml)
     for more details.
+- `knead` contains integration tests in the form of the [`test.sh`
+  script](https://github.com/font-bakers/knead/blob/master/scripts/test.sh).
+  `knead` is currently not unit tested.
+
