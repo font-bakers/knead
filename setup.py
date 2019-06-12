@@ -35,7 +35,7 @@ CLASSIFIERS = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.5",
     "Topic :: Scientific/Engineering",
-    "Text Processing :: Fonts",
+    "Topic :: Text Processing :: Fonts",
 ]
 
 

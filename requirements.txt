@@ -1,5 +1,5 @@
 absl-py
-fonttools
+fonttools>=3.42.0
 numpy
 protobuf
 tqdm
