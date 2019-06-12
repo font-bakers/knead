@@ -31,12 +31,12 @@ develop: init venv-develop  # Set up development environment.
 
 lint-black:
 	@printf "Checking code style with black...\n"
-	black knead/ --check --target-version=py35 --exclude=font_pb2.py
+	black knead/ --check --target-version=py35 --exclude=glyph_batch_pb2.py
 	@printf "\033[1;34mBlack passes!\033[0m\n\n"
 
 lint-pylint:
 	@printf "Checking code style with pylint...\n"
-	pylint knead/ --rcfile=.pylintrc --ignore=font_pb2.py
+	pylint knead/ --rcfile=.pylintrc --ignore=glyph_batch_pb2.py
 	@printf "\033[1;34mPylint passes!\033[0m\n\n"
 
 lint: lint-black lint-pylint  # Check code style with black and pylint.
@@ -49,7 +49,7 @@ test: clean  # Run tests.
 check: clean lint test  # Alias for `make clean lint test`.
 
 black:  # Format code in-place with black.
-	black knead/ --target-version=py35 --exclude=font_pb2.py
+	black knead/ --target-version=py35 --exclude=glyph_batch_pb2.py
 
 clean:  # Clean project directories.
 	rm -rf site/ __pycache__/ *.log data/proto/

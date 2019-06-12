@@ -1,7 +1,7 @@
 import os
 import json
 from itertools import chain
-from knead.utils import font_pb2, CHARACTER_SET, UPPERCASES, LOWERCASES
+from knead.utils import glyph_batch_pb2, CHARACTER_SET, UPPERCASES, LOWERCASES
 
 
 def format_file_with_character(file_to, character):
@@ -68,7 +68,7 @@ def json_to_proto(file_from, file_to):
         # Basically we are going to flatten everything into just an
         # array of points. We will keep track of the location of where each
         # contour stops so we can reconstruct on the other end.
-        proto = font_pb2.glyph()
+        proto = glyph_batch_pb2.Batch()
 
         if character in CHARACTER_SET and not_repeat(character, font_dict):
             contours = font_dict[character]
@@ -80,10 +80,10 @@ def json_to_proto(file_from, file_to):
                 points.extend(list(chain.from_iterable(chain.from_iterable(contour))))
 
             # Write it in
-            new_glyph = proto.glyph.add()  # pylint: disable=E1101
+            new_glyph = proto.glyphs.add()  # pylint: disable=E1101
             new_glyph.num_contours = len(contours)
             new_glyph.bezier_points.extend(points)
-            new_glyph.contour_locations.extend(num_points_in_contours)
+            new_glyph.num_points_in_contours.extend(num_points_in_contours)
             new_glyph.font_name = os.path.split(file_to)[-1]
             new_glyph.glyph_name = character
 

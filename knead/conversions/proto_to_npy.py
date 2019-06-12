@@ -1,7 +1,7 @@
 from collections import deque
 from absl import flags
 import numpy as np
-from knead.utils import font_pb2
+from knead.utils import glyph_batch_pb2
 
 FLAGS = flags.FLAGS
 
@@ -39,13 +39,13 @@ def sample_quadratic_bezier(control_points, num_steps):
 
 
 def read(buf, max_num_points_in_contour, num_samples):
-    glyph_proto = font_pb2.glyph()
+    proto = glyph_batch_pb2.Batch()
     with open(buf, "rb") as f:
-        glyph_proto.ParseFromString(f.read())
+        proto.ParseFromString(f.read())
 
-    glyph = glyph_proto.glyph[0]  # pylint: disable=E1101
+    glyph = proto.glyphs[0]  # pylint: disable=E1101
     bezier_points = deque(glyph.bezier_points)
-    num_points_in_contours = glyph.contour_locations
+    num_points_in_contours = glyph.num_points_in_contours
 
     if len(num_points_in_contours) > 3:
         raise RuntimeError("Glyph contains more than 3 contours.")

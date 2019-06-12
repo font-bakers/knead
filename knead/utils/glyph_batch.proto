@@ -1,0 +1,13 @@
+syntax="proto2";
+
+message Batch {
+  repeated Glyph glyphs=1;
+}
+
+message Glyph {
+  optional int32 num_contours=1;
+  repeated float bezier_points=2;
+  repeated int32 num_points_in_contours=3;
+  optional string font_name=4;
+  optional string glyph_name=5;
+}
