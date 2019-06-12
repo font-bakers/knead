@@ -1,5 +1,5 @@
-absl-py==0.7.0
-fonttools==3.42.0
-numpy==1.16.0
-protobuf==3.6.1
-tqdm==4.31.1
+absl-py
+fonttools
+numpy
+protobuf
+tqdm
