@@ -7,7 +7,7 @@ For more information on how `knead` works, refer to the user guide.
 The latest release of `knead` can be installed from PyPI:
 
 ```bash
-pip install fontbakers-knead
+pip install knead
 ```
 
 The bleeding edge development branch of `knead` can be cloned from GitHub:
@@ -21,6 +21,8 @@ pip install -e .
 
 ## Usage
 
+To run `knead` on the command line:
+
 ```bash
 knead --input INPUT_FORMAT --output OUTPUT_FORMAT --directory PATH/TO/DATA/
 ```
@@ -31,7 +33,7 @@ knead --input INPUT_FORMAT --output OUTPUT_FORMAT --directory PATH/TO/DATA/
       the [`fonttools`
       documentation](https://github.com/fonttools/fonttools#ttx--from-opentype-and-truetype-to-xml-and-back).
     - `json`: a `.json` format of the font.
-    - `proto`: a `.proto` format of each glyph in each font.
+    - `pb`: a `.pb` serialized protobuf format of each glyph in each font.
     - `npy`: a `.npy` format of samples from quadratic Bezier curves in each
       glyph in each font.
 
@@ -58,15 +60,15 @@ data
 ├── json
 │   ├── Georgia.json
 │   └── ...
-├── npy
+├── npy_with_640_samples
 │   ├── Georgia.A_upper.npy
 │   ├── Georgia.B_upper.npy
 │   ├── Georgia.C_upper.npy
 │   └── ...
-├── proto
-│   ├── Georgia.A_upper.proto
-│   ├── Georgia.B_upper.proto
-│   ├── Georgia.C_upper.proto
+├── pb
+│   ├── Georgia.A_upper.pb
+│   ├── Georgia.B_upper.pb
+│   ├── Georgia.C_upper.pb
 │   └── ...
 ├── ttf
 │   ├── Georgia.ttf

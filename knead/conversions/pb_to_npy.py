@@ -1,7 +1,7 @@
 from collections import deque
 from absl import flags
 import numpy as np
-from knead.utils import font_pb2
+from knead.utils import glyph_batch_pb2
 
 FLAGS = flags.FLAGS
 
@@ -39,17 +39,17 @@ def sample_quadratic_bezier(control_points, num_steps):
 
 
 def read(buf, max_num_points_in_contour, num_samples):
-    glyph_proto = font_pb2.glyph()
+    protobuf = glyph_batch_pb2.Batch()
     with open(buf, "rb") as f:
-        glyph_proto.ParseFromString(f.read())
+        protobuf.ParseFromString(f.read())
 
-    glyph = glyph_proto.glyph[0]  # pylint: disable=E1101
+    glyph = protobuf.glyphs[0]  # pylint: disable=E1101
     bezier_points = deque(glyph.bezier_points)
-    num_points_in_contour = glyph.contour_locations
+    num_points_in_contours = glyph.num_points_in_contours
 
-    if len(num_points_in_contour) > 3:
+    if len(num_points_in_contours) > 3:
         raise RuntimeError("Glyph contains more than 3 contours.")
-    if max(num_points_in_contour) > max_num_points_in_contour:
+    if max(num_points_in_contours) > max_num_points_in_contour:
         raise RuntimeError(
             "Glyph contains contour with more than {} control points.".format(
                 max_num_points_in_contour
@@ -57,7 +57,7 @@ def read(buf, max_num_points_in_contour, num_samples):
         )
 
     contours = np.zeros((3, num_samples, 2), np.float32)
-    for i, num_points in enumerate(num_points_in_contour):
+    for i, num_points in enumerate(num_points_in_contours):
         points = np.array([bezier_points.popleft() for _ in range(num_points * 6)])
         contour = points.reshape([-1, 6]).reshape(-1, 3, 2)
         contours[i] = sample_quadratic_bezier(contour, num_samples)
@@ -65,7 +65,7 @@ def read(buf, max_num_points_in_contour, num_samples):
     return contours
 
 
-def proto_to_npy(file_from, file_to):
+def pb_to_npy(file_from, file_to):
     contours = read(file_from, FLAGS.max_num_points_in_contour, FLAGS.num_samples)
     if contours is not None:
         np.save(file_to, contours, allow_pickle=False)
