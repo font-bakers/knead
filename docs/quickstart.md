@@ -7,7 +7,7 @@ For more information on how `knead` works, refer to the user guide.
 The latest release of `knead` can be installed from PyPI:
 
 ```bash
-pip install fontbakers-knead
+pip install knead
 ```
 
 The bleeding edge development branch of `knead` can be cloned from GitHub:
@@ -20,6 +20,8 @@ pip install -e .
 ```
 
 ## Usage
+
+To run `knead` on the command line:
 
 ```bash
 knead --input INPUT_FORMAT --output OUTPUT_FORMAT --directory PATH/TO/DATA/
@@ -58,7 +60,7 @@ data
 ├── json
 │   ├── Georgia.json
 │   └── ...
-├── npy
+├── npy_with_640_samples
 │   ├── Georgia.A_upper.npy
 │   ├── Georgia.B_upper.npy
 │   ├── Georgia.C_upper.npy
