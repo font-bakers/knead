@@ -32,19 +32,11 @@ SPECIALS = {
 
 CHARACTER_SET = UPPERCASES.union(LOWERCASES, NUMERALS, SPECIALS)
 
-_FILE_EXTENSIONS = {
-    "ttf": ".ttf",
-    "ttx": ".ttx",
-    "json": ".json",
-    "pb": ".pb",
-    "npy": ".npy",
-}
-
 
 def get_filenames(directory, conversion):
     convert_from, convert_to = conversion.split("_to_")
-    extension_from = _FILE_EXTENSIONS[convert_from]
-    extension_to = _FILE_EXTENSIONS[convert_to]
+    extension_from = "." + convert_from
+    extension_to = "." + convert_to
 
     files_from = glob(join(directory, convert_from, "*" + extension_from))
     files_to = [
