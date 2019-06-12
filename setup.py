@@ -3,21 +3,37 @@ import re
 from setuptools import setup, find_packages
 
 
-NAME = "knead"
+NAME = "Knead"
 MAINTAINER = "The Font Bakers"
 DESCRIPTION = "A command line tool for preprocessing, manipulating and serializing font files for deep learning applications."
 LICENSE = "MIT"
 URL = "https://github.com/font-bakers/knead/"
+PYTHON_REQUIRES = ">=3.5.2"
 
 PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
 REQUIREMENTS_FILE = os.path.join(PROJECT_ROOT, "requirements.txt")
 README_FILE = os.path.join(PROJECT_ROOT, "README.md")
 
-with open(README_FILE, encoding="utf-8") as f:
-    LONG_DESCRIPTION = f.read()
+try:
+    with open(README_FILE, encoding="utf-8") as f:
+        LONG_DESCRIPTION = "\n" + f.read()
+        LONG_DESCRIPTION_CONTENT_TYPE = "text/markdown"
+except FileNotFoundError:
+    LONG_DESCRIPTION = DESCRIPTION
+    LONG_DESCRIPTION_CONTENT_TYPE = "text/plain"
 
 with open(REQUIREMENTS_FILE) as f:
     INSTALL_REQUIRES = f.read().splitlines()
+
+CLASSIFIERS = [
+    "Development Status :: 2 - Pre-Alpha" "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.5",
+    "Topic :: Scientific/Engineering",
+]
 
 
 def get_version():
@@ -25,9 +41,9 @@ def get_version():
     lines = open(version_file, "rt").readlines()
     version_regex = r"^__version__ = ['\"]([^'\"]*)['\"]"
     for line in lines:
-        mo = re.search(version_regex, line, re.M)
-        if mo:
-            return mo.group(1)
+        matches = re.search(version_regex, line, re.M)
+        if matches:
+            return matches.group(1)
     raise RuntimeError("Unable to find version in {}.".format(version_file))
 
 
@@ -38,11 +54,12 @@ if __name__ == "__main__":
         maintainer=MAINTAINER,
         description=DESCRIPTION,
         long_description=LONG_DESCRIPTION,
-        long_description_content_type="text/markdown",
+        long_description_content_type=LONG_DESCRIPTION_CONTENT_TYPE,
         license=LICENSE,
+        classifiers=CLASSIFIERS,
         url=URL,
         packages=find_packages(),
-        python_requires=">=3.5.2",
+        python_requires=PYTHON_REQUIRES,
         install_requires=INSTALL_REQUIRES,
         entry_points={"console_scripts": ["knead = knead.__main__:main"]},
     )
