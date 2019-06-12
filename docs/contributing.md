@@ -37,15 +37,29 @@ format staged Python files in-place using `black`.
 
 ## Development details
 
-- `knead` follows the [Semantic Versioning
+- `knead` adopts the [Semantic Versioning
   2.0.0](https://semver.org/#semantic-versioning-200) specification.
+
 - `knead` targets Python 3.5+ (specifically, 3.5.2+) compatibility.
+
 - `knead` uses `black` and `pylint` to format and lint code, respectively.
   - However, `black` requires Python 3.6+ to run. Thus, we test in Python 3.5
     but lint in Python 3.6. See our [Travis
     configuration](https://github.com/font-bakers/knead/blob/master/.travis.yml)
     for more details.
+
 - `knead` contains integration tests in the form of the [`test.sh`
   script](https://github.com/font-bakers/knead/blob/master/scripts/test.sh).
   `knead` is currently not unit tested.
+  - Briefly, `test.sh` first hashes the `data/` directory (using the `shasum`
+    command line tool). It then runs the entire data pipeline, conversion by
+    conversion, on one font (`Georgia.ttf`).  After every conversion, the
+    `data/` directory is hashed again. If the hash differs from the initial
+    hash, the test fails. In this way, we test the `knead` output for
+    correctness.
+  - This is not possible for `.pb` files, which change after every write. Thus,
+    we merely count the number of `.pb` files that are generated.
 
+- The `knead` documentation is generated using `mkdocs`. See the
+  [`mkdocs.yml`](https://github.com/font-bakers/knead/blob/master/mkdocs.yml)
+  configuration for more details.

@@ -58,7 +58,7 @@ data
 ├── json
 │   ├── Georgia.json
 │   └── ...
-├── npy
+├── npy_with_640_samples
 │   ├── Georgia.A_upper.npy
 │   ├── Georgia.B_upper.npy
 │   ├── Georgia.C_upper.npy
