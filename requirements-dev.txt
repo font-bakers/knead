@@ -3,3 +3,6 @@ black
 bumpversion
 mkdocs
 pylint
+setuptools
+twine
+wheel

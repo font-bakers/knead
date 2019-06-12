@@ -3,7 +3,7 @@ import re
 from setuptools import setup, find_packages
 
 
-NAME = "Knead"
+NAME = "knead"
 MAINTAINER = "The Font Bakers"
 DESCRIPTION = "A command line tool for preprocessing, manipulating and serializing font files for deep learning applications."
 LICENSE = "MIT"
@@ -26,7 +26,8 @@ with open(REQUIREMENTS_FILE) as f:
     INSTALL_REQUIRES = f.read().splitlines()
 
 CLASSIFIERS = [
-    "Development Status :: 2 - Pre-Alpha" "License :: OSI Approved :: MIT License",
+    "Development Status :: 2 - Pre-Alpha",
+    "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
     "Operating System :: OS Independent",
     "Programming Language :: Python",
