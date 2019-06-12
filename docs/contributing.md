@@ -1,6 +1,11 @@
 # Contributing Guide
 
-Happy baking! :bread:
+[![GitHub Issues](https://img.shields.io/github/issues/font-bakers/knead.svg)](https://github.com/font-bakers/knead/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/font-bakers/knead.svg)](https://github.com/font-bakers/knead/pulls)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+[![Code Style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
+
+Happy baking!
 
 ## Set up development environment
 
@@ -18,6 +23,10 @@ deactivate
 ```bash
 make check
 ```
+
+This will both lint the `knead/` directory (with `black` and `pylint`), and run
+test scripts. You may lint and test separately with `make lint` and `make test`,
+respectively.
 
 Make sure that all checks pass before committing: you should get several blue
 success messages as each check passes.
