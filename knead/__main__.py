@@ -98,11 +98,12 @@ def convert(argv):
 
     for conversion in conversions:
         print("Converting {} to {}...".format(*conversion.split("_to_")))
+        filenames = knead.utils.get_filenames(FLAGS.directory, conversion)
         convert = getattr(knead.conversions, conversion, None)
 
         # Check that directories exist.
-        dir_from = os.path.join(FLAGS.directory, conversion.split("_to_")[0])
-        dir_to = os.path.join(FLAGS.directory, conversion.split("_to_")[-1])
+        dir_from = os.path.split(filenames[0][0])[0]
+        dir_to = os.path.split(filenames[0][1])[0]
         if not os.path.exists(dir_from):
             raise RuntimeError("{} does not exist.".format(dir_from))
         if not os.path.exists(dir_to):
@@ -112,9 +113,7 @@ def convert(argv):
         # any errors,
         num_conversions = 0
         num_exceptions = 0
-        for file_from, file_to in tqdm(
-            knead.utils.get_filenames(FLAGS.directory, conversion)
-        ):
+        for file_from, file_to in tqdm(filenames):
             try:
                 convert(file_from, file_to)
                 num_conversions += 1
