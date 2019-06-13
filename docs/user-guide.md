@@ -15,34 +15,6 @@ typefaces are represented.
 
 ![Ampersand](img/ampersand.png)
 
-In a `.ttx` (a.k.a. TrueType XML) file, each glyph is contained within a
-`<ttGlyph>` tag. This tag has several `<contour>` definitions.
-
-Within each contour we have successive `<pt>` tags which define control points.
-Each control point specifies its location (i.e., x and y coordinates) and
-whether the point is "on curve" or "off curve".
-
-There are some important rules on how to understand these points.
-
-1. If two successive points are "on" this means that they form a line.
-2. If three points are "on", "off", "on" then this defines a quadratic Bezier
-   curve.
-3. If there are several "off" points with no "on" point in between them, there
-   is a virtual "on" point in the middle of the two "off" points. This is a form
-   of data compression.
-4. If the first point in a contour is an "off" point go to the last point and
-   start from there. If the last point is also "off" start with a virtual "on"
-   in between the first and the last one.
-
-### References
-
-1. [_Glyph Hell_ by David
-   Turner](http://chanae.walon.org/pub/ttf/ttf_glyphs.htm)
-2. [The _FreeType Glyph Conventions_
-   documentation](https://www.freetype.org/freetype2/docs/glyphs/glyphs-6.html)
-3. This [StackOverflow
-   thread](https://stackoverflow.com/questions/20733790/truetype-fonts-glyph-are-made-of-quadratic-bezier-why-do-more-than-one-consecu)
-
 ## The `knead` data pipeline
 
 Under the hood, the data conversion pipeline looks like this:
@@ -66,8 +38,34 @@ Running `knead --input ttf --output ttx MyFont.ttf` is essentially a thin callth
 `ttx -q -o MyFont.ttx MyFont.ttf`.
 
 The `.ttx` file format is just an XML file that encodes a font, specified by
-`fonttools`. For more information, refer to [the `fonttools`
-documentation](https://github.com/fonttools/fonttools#ttx--from-opentype-and-truetype-to-xml-and-back).
+`fonttools`. In a `.ttx` file, each glyph is contained within a `<ttGlyph>` tag.
+This tag has several `<contour>` definitions.
+
+Within each contour we have successive `<pt>` tags which define control points.
+Each control point specifies its location (i.e., x and y coordinates) and
+whether the point is "on curve" or "off curve".
+
+There are some important rules on how to understand these points.
+
+1. If two successive points are "on" this means that they form a line.
+2. If three points are "on", "off", "on" then this defines a quadratic Bezier
+   curve.
+3. If there are several "off" points with no "on" point in between them, there
+   is a virtual "on" point in the middle of the two "off" points. This is a form
+   of data compression.
+4. If the first point in a contour is an "off" point go to the last point and
+   start from there. If the last point is also "off" start with a virtual "on"
+   in between the first and the last one.
+
+For more information, refer to:
+
+- [The `fonttools`
+  documentation](https://github.com/fonttools/fonttools#ttx--from-opentype-and-truetype-to-xml-and-back).
+- [_Glyph Hell_ by David Turner](http://chanae.walon.org/pub/ttf/ttf_glyphs.htm)
+- [The _FreeType Glyph Conventions_
+  documentation](https://www.freetype.org/freetype2/docs/glyphs/glyphs-6.html)
+- [This StackOverflow
+  thread](https://stackoverflow.com/questions/20733790/truetype-fonts-glyph-are-made-of-quadratic-bezier-why-do-more-than-one-consecu)
 
 ### `.ttx` to `.json`
 
