@@ -71,15 +71,14 @@ documentation](https://github.com/fonttools/fonttools#ttx--from-opentype-and-tru
 
 ### `.ttx` to `.json`
 
-This is done in Python, following all the TrueType rules described above.
+This is done in Python, using the `xml` library, and following all the TrueType
+rules described above.
 
 The JSON object is structured as a dictionary, keyed by the character (e.g.
 `"A"` or `"exclam"`), and valued by quadruply-nested lists. The four layers of
 nesting are best explained by code:
 
 ```python
-import json
-
 with open("MyFont.json", "r") as f:
     font = json.read(f)
 
@@ -98,12 +97,22 @@ assert len(control_point) = 2  # x and y coordinates
 
 ### `.json` to `.pb`
 
-`.pb` files are saved with `_upper` and `_lower` since some filesystems do not
-distinguish between uppercase and lowercase filenames.
+This is done in Python, using the `protobuf` library.
+
+Refer to the [developer
+guide](https://font-bakers.github.io/knead/developer-guide/#protocol-buffers-protobufs)
+for more information on what protocol buffers are and how `knead` uses them.
+
+Note that `.pb` files are saved with `_upper` and `_lower` since some
+filesystems do not distinguish between uppercase and lowercase filenames.
 
 ### `.pb` to `.npy`
 
-This samples from the quadratic Bezier curves.
+This is done in Python, using the `numpy` library.
+
+Note that unlike all other conversions, a single `.pb` file can be converted to
+_several_ `.npy` files (e.g. by changing the number of samples per Bezier curve
+via `--num_samples`, etc.)
 
 ## Notes
 
