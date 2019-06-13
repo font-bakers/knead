@@ -56,7 +56,7 @@ clean:  # Clean project directories.
 	find knead/ -type d -name "__pycache__" -delete
 	find knead/ -type f \( -name "*.pyc" -o -name "*.log" \) -delete
 
-package: clean  # Package and release knead to TestPyPI (requires credentials).
+package: clean  # Package knead in preparation for releasing to PyPI.
 	${PYTHON} setup.py sdist bdist_wheel
 	twine check dist/*
 	@printf "\n\n\033[1;34mTo upload to PyPI, run:\033[0m\n\n"
