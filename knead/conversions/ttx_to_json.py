@@ -1,6 +1,9 @@
 from xml.etree import cElementTree
 import json
+from absl import flags
 from knead.utils import CHARACTER_SET
+
+FLAGS = flags.FLAGS
 
 
 def create_point(left_point, right_point, em_value):
@@ -236,8 +239,11 @@ def ttx_to_json(file_from, file_to):
         file_string = f.read().encode("ascii", "ignore")
 
     font_file = cElementTree.fromstring(file_string)
-    units_per_em = font_file.findall(".//unitsPerEm")[0]
-    em_value = float(units_per_em.get("value"))
+    em_value = (
+        float(font_file.findall(".//unitsPerEm")[0].get("value"))
+        if FLAGS.normalize
+        else 1.0
+    )
     curves = {}
     glyphs = font_file.findall(".//TTGlyph")
 

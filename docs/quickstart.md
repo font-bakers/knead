@@ -87,10 +87,15 @@ catch the exception and write the error message (along with a stack trace) to a
 Optional flags only matter if certain values are passed for the required flags
 (e.g.  if `--output npy` is passed), and always default to some value.
 
-1. `--num_samples`: The number of samples to evaluate per quadratic Bezier
+1. `--normalize`: Whether or not to normalize the `x` and `y` coordinates of the
+   control points by the em box size. Pass `--normalize` to set to True, and
+   pass `--nonormalize` to set to False. Defaults to True. Only relevant if
+   `--output json` is passed.
+
+2. `--num_samples`: The number of samples to evaluate per quadratic Bezier
    curve. Defaults to 640. Only relevant if `--output npy` is passed.
 
-2. `--max_num_points_in_contour`: The maximum allowable number of control points
+3. `--max_num_points_in_contour`: The maximum allowable number of control points
    per contour. Any glyphs containing contours with more than this number of
    control points will raise a `RuntimeError` upon conversion. Defaults to 60.
    Only relevant if `--output npy` is passed.
