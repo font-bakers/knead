@@ -88,8 +88,9 @@ Optional flags only matter if certain values are passed for the required flags
 (e.g.  if `--output npy` is passed), and always default to some value.
 
 1. `--normalize`: Whether or not to normalize the `x` and `y` coordinates of the
-   control points by the em box size. Only relevant if `--output json` is
-   passed.
+   control points by the em box size. Pass `--normalize` to set to True, and
+   pass `--nonormalize` to set to False. Defaults to True. Only relevant if
+   `--output json` is passed.
 
 2. `--num_samples`: The number of samples to evaluate per quadratic Bezier
    curve. Defaults to 640. Only relevant if `--output npy` is passed.
