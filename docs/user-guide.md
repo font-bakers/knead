@@ -40,7 +40,7 @@ There are some important rules on how to understand these points.
    Turner](http://chanae.walon.org/pub/ttf/ttf_glyphs.htm)
 2. [The _FreeType Glyph Conventions_
    documentation](https://www.freetype.org/freetype2/docs/glyphs/glyphs-6.html)
-3. [This StackOverflow
+3. This [StackOverflow
    thread](https://stackoverflow.com/questions/20733790/truetype-fonts-glyph-are-made-of-quadratic-bezier-why-do-more-than-one-consecu)
 
 ## The `knead` data pipeline
@@ -65,9 +65,36 @@ documentation](https://github.com/fonttools/fonttools#ttx--from-opentype-and-tru
 Running `knead --input ttf --output ttx MyFont.ttf` is essentially a thin callthrough to
 `ttx -q -o MyFont.ttx MyFont.ttf`.
 
+The `.ttx` file format is just an XML file that encodes a font, specified by
+`fonttools`. For more information, refer to [the `fonttools`
+documentation](https://github.com/fonttools/fonttools#ttx--from-opentype-and-truetype-to-xml-and-back).
+
 ### `.ttx` to `.json`
 
 This is done in Python, following all the TrueType rules described above.
+
+The JSON object is structured as a dictionary, keyed by the character (e.g.
+`"A"` or `"exclam"`), and valued by quadruply-nested lists. The four layers of
+nesting are best explained by code:
+
+```python
+import json
+
+with open("MyFont.json", "r") as f:
+    font = json.read(f)
+
+glyph = font["A"]
+assert len(glyph) == num_contours_in_glyph
+
+contour = glyph[0]
+assert len(contour) == num_beziers_in_contour
+
+bezier = glyph[0]
+assert len(bezier) == 3  # Number of control points in a quadratic Bezier curve
+
+control_point = bezier[0]
+assert len(control_point) = 2  # x and y coordinates
+```
 
 ### `.json` to `.pb`
 

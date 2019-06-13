@@ -9,8 +9,8 @@ DESCRIPTION = "A command line tool for preprocessing, manipulating and serializi
 LICENSE = "MIT"
 URL = "https://github.com/font-bakers/knead"
 PROJECT_URLS = {
-    "Issue Tracker": "https://github.com/font-bakers/knead/issues",
     "Documentation": "https://font-bakers.github.io/knead/",
+    "Issue Tracker": "https://github.com/font-bakers/knead/issues",
 }
 PYTHON_REQUIRES = ">=3.5.2"
 
@@ -30,7 +30,7 @@ with open(REQUIREMENTS_FILE) as f:
     INSTALL_REQUIRES = f.read().splitlines()
 
 CLASSIFIERS = [
-    "Development Status :: 2 - Pre-Alpha",
+    "Development Status :: 3 - Alpha",
     "Environment :: Console",
     "License :: OSI Approved :: MIT License",
     "Natural Language :: English",

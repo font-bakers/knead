@@ -35,7 +35,7 @@ Note that `knead` uses a [pre-commit git
 hook](https://github.com/font-bakers/knead/blob/master/.githooks/pre-commit) to
 format staged Python files in-place using `black`.
 
-## New release
+## Packaging and releasing `knead`
 
 First, ensure that the version number has been bumped appropriately:`knead`
 adopts the [Semantic Versioning
@@ -56,21 +56,17 @@ Then, run `make release`. It will package `knead` and validate the resulting
 [built
 distribution](https://packaging.python.org/glossary/#term-built-distribution).
 
-Finally, upload the source archive and build distribution to TestPyPI and PyPI.
-You will be asked for a username and password for the respective package index.
+Finally, upload the source archive and build distribution to PyPI. You will be
+asked for a username and password for PyPI.
 
 ```bash
-# To upload to TestPyPI (heavily recommended before uploading to PyPI)
-twine upload --repository-url https://test.pypi.org/legacy/ dist/*
-
-# To upload to PyPI
 twine upload dist/*
 ```
 
 For more information, refer to the [Python packaging
 documentation](https://packaging.python.org/tutorials/packaging-projects/).
 
-## Development details
+## Miscellaneous development details
 
 - `knead` adopts the [Semantic Versioning
   2.0.0](https://semver.org/#semantic-versioning-200) specification.

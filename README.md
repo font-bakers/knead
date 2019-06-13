@@ -53,13 +53,20 @@ data
     └── ...
 ```
 
+Refer to our [quickstart](https://font-bakers.github.io/knead/quickstart/) for
+more information on how to use `knead`.
+
 ## Documentation
 
 Please refer to our [full documentation](https://font-bakers.github.io/knead/).
 
 ## Contributing
 
-Contributions are welcome! Please see our [contribution
+Contributions are always welcome! Please see our [issue
+tracker](https://github.com/font-bakers/knead/issues) for outstanding issues,
+[code of
+conduct](https://github.com/font-bakers/knead/blob/master/CODE_OF_CONDUCT.md)
+for community guidelines, and our [contributing
 guide](https://font-bakers.github.io/knead/contributing/) for details on how to
 make a contribution.
 
