@@ -16,6 +16,11 @@ flags.DEFINE_enum("output", None, DATA_PIPELINE, "Output data format.")
 flags.mark_flag_as_required("output")
 flags.DEFINE_string("directory", None, "Directory.")
 flags.mark_flag_as_required("directory")
+flags.DEFINE_boolean(
+    "normalize",
+    True,
+    "If True, normalizes all coordinates by the size of the em box. Defaults to True.",
+)
 flags.DEFINE_integer(
     "num_samples",
     640,
