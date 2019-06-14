@@ -7,5 +7,6 @@ nav:
     - Developer Guide: developer-guide.md
     - Contributing: contributing.md
     - About:
+      - Code of Conduct: https://github.com/font-bakers/knead/blob/master/CODE_OF_CONDUCT.md
       - License: https://github.com/font-bakers/knead/blob/master/LICENSE
 theme: readthedocs
