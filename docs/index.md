@@ -1,8 +1,8 @@
-# Knead Documentation
-
 <p align="center">
 <img src="https://raw.githubusercontent.com/font-bakers/knead/master/docs/img/logo.png" alt="Knead logo" title="Knead logo" align="center"></img>
 </p>
+
+---
 
 Welcome to the `knead` documentation, and happy baking!
 
