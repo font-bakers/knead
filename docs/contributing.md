@@ -4,7 +4,7 @@
 [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/font-bakers/knead.svg)](https://github.com/font-bakers/knead/pulls)
 [![Code Style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](code-of-conduct.md)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](https://github.com/font-bakers/glaze/blob/master/CODE_OF_CONDUCT.md)
 
 Happy baking!
 

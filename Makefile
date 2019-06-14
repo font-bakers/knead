@@ -53,6 +53,7 @@ black:  # Format code in-place with black.
 
 clean:  # Clean project directories.
 	rm -rf dist/ site/ __pycache__/ *.log data/proto/
+	find knead/ -type d -name "__pycache__" -exec rm -rf {} +
 	find knead/ -type d -name "__pycache__" -delete
 	find knead/ -type f \( -name "*.pyc" -o -name "*.log" \) -delete
 
