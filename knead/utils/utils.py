@@ -6,9 +6,7 @@ from absl import flags
 FLAGS = flags.FLAGS
 
 UPPERCASES = set("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-
 LOWERCASES = {character.lower() for character in UPPERCASES}
-
 NUMERALS = {
     "zero",
     "one",
@@ -21,7 +19,6 @@ NUMERALS = {
     "eight",
     "nine",
 }
-
 SPECIALS = {
     "exclam",
     "numbersign",
@@ -32,7 +29,6 @@ SPECIALS = {
     "question",
     "at",
 }
-
 CHARACTER_SET = UPPERCASES.union(LOWERCASES, NUMERALS, SPECIALS)
 
 
