@@ -52,7 +52,7 @@ latter method is simpler and recommended for such a simple project as `knead`).
 For more information, see the [bumpversion
 documentation](https://github.com/peritus/bumpversion#usage).
 
-Then, run `make release`. It will package `knead` and validate the resulting
+Then, run `make package`. It will package `knead` and validate the resulting
 [source archive](https://packaging.python.org/glossary/#term-source-archive) and
 [built
 distribution](https://packaging.python.org/glossary/#term-built-distribution).

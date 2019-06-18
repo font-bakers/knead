@@ -13,10 +13,7 @@ pip install knead
 The bleeding edge development branch of `knead` can be cloned from GitHub:
 
 ```bash
-git clone https://github.com/font-bakers/knead/
-cd knead/
-pip install -r requirements.txt
-pip install -e .
+pip install git+https://github.com/font-bakers/knead.git
 ```
 
 ## Usage
