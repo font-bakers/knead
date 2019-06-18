@@ -1,1 +1,6 @@
-include knead/utils/glyph_batch.proto
+recursive-include data/ *
+recursive-include docs/ *
+recursive-include knead/tests/ *
+include knead/utils/*.proto
+include scripts/*.sh
+include requirements.txt
