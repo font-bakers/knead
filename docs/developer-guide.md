@@ -1,36 +1,5 @@
 # Developer Guide
 
-## Protocol buffers (protobufs)
-
-In the words of [the Google
-documentation](https://developers.google.com/protocol-buffers/docs/overview),
-protocol buffers are
-
-> a language-neutral, platform-neutral, extensible way of serializing structured
-> data for use in communications protocols, data storage, and more. 
-
-For more information on protobufs, please refer to [the protobuf developer
-guide](https://developers.google.com/protocol-buffers/docs/overview), and [the
-protobuf tutorial for
-Python](https://developers.google.com/protocol-buffers/docs/pythontutorial).
-Here, we describe how `knead` uses protobufs.
-
-The
-[`glyph_batch.proto`](https://github.com/font-bakers/knead/blob/master/knead/utils/glyph_batch.proto)
-file specifies the protobuf for a batch of glyphs, and the
-[`glyph_batch_pb2.py`](https://github.com/font-bakers/knead/blob/master/knead/utils/glyph_batch_pb2.py)
-is the [corresponding output of the protobuf
-compiler](https://developers.google.com/protocol-buffers/docs/pythontutorial#compiling-your-protocol-buffers).
-
-To compile a `glyph_batch.proto` file to a Python file, you will need to install
-the protobuf compiler (`protoc`). See the [protobuf compiler installtion
-instructions](https://github.com/protocolbuffers/protobuf/#protocol-compiler-installation).
-Then, run the following command from the project root directory:
-
-```bash
-protoc --proto_path=knead/utils/ --python_out=knead/utils/ knead/utils/glyph_batch.proto
-```
-
 ## The TrueType standard and the `.ttx` file format
 
 Briefly, the [TrueType font standard](https://en.wikipedia.org/wiki/TrueType)
@@ -64,5 +33,44 @@ For more information, refer to:
 - [_Glyph Hell_ by David Turner](http://chanae.walon.org/pub/ttf/ttf_glyphs.htm)
 - [The _FreeType Glyph Conventions_
   documentation](https://www.freetype.org/freetype2/docs/glyphs/glyphs-6.html)
-- [This StackOverflow
-  thread](https://stackoverflow.com/questions/20733790/truetype-fonts-glyph-are-made-of-quadratic-bezier-why-do-more-than-one-consecu)
+- [This StackOverflow thread on parsing `.ttf`
+  files](https://stackoverflow.com/q/20733790)
+
+## Protocol buffers (protobufs)
+
+In the words of [the Google
+documentation](https://developers.google.com/protocol-buffers/docs/overview),
+protocol buffers are
+
+> a language-neutral, platform-neutral, extensible way of serializing structured
+> data for use in communications protocols, data storage, and more. 
+
+For more information on protobufs, please refer to [the protobuf developer
+guide](https://developers.google.com/protocol-buffers/docs/overview), and [the
+protobuf tutorial for
+Python](https://developers.google.com/protocol-buffers/docs/pythontutorial).
+Here, we describe how `knead` uses protobufs.
+
+The
+[`glyph_batch.proto`](https://github.com/font-bakers/knead/blob/master/knead/utils/glyph_batch.proto)
+file specifies the protobuf for a batch of glyphs, and the
+[`glyph_batch_pb2.py`](https://github.com/font-bakers/knead/blob/master/knead/utils/glyph_batch_pb2.py)
+is the [corresponding output of the protobuf
+compiler](https://developers.google.com/protocol-buffers/docs/pythontutorial#compiling-your-protocol-buffers).
+
+To compile a `glyph_batch.proto` file to a Python file, you will need to install
+the protobuf compiler (`protoc`). See the [protobuf compiler installtion
+instructions](https://github.com/protocolbuffers/protobuf/#protocol-compiler-installation).
+Then, run the following command from the project root directory:
+
+```bash
+protoc --proto_path=knead/utils/ --python_out=knead/utils/ knead/utils/glyph_batch.proto
+```
+
+## Miscellaneous notes
+
+- Note that since `knead` relies heavily on `fonttools` (specifically, the `ttx`
+  command line tool) to convert `.ttf` files to `.ttx`, correct and reproducible
+  behavior is contingent on having the correct version of `fonttools`.
+  Therefore, the `fonttools` version number is pinned in `knead`'s
+  [`requirements.txt`](https://github.com/font-bakers/knead/blob/master/requirements.txt).
