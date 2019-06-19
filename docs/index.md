@@ -20,4 +20,4 @@ guide](https://font-bakers.github.io/knead/user-guide/) for details about
 guide](https://font-bakers.github.io/knead/developer-guide/) for an explanation
 of `knead`'s project structure, and the [contributing
 guide](https://font-bakers.github.io/knead/contributing/) for details on how to
-make a contribution to `knead`.
+make a contribution.

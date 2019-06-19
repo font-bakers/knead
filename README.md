@@ -28,8 +28,6 @@ pip install knead
 
 ## Usage
 
-To run `knead` on the command line:
-
 ```bash
 knead --input INPUT_FORMAT --output OUTPUT_FORMAT --directory PATH/TO/DATA/
 ```
