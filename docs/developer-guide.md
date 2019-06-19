@@ -69,8 +69,8 @@ protoc --proto_path=knead/utils/ --python_out=knead/utils/ knead/utils/glyph_bat
 
 ## Miscellaneous notes
 
-- Note that since `knead` relies heavily on `fonttools` (specifically, the `ttx`
-  command line tool) to convert `.ttf` files to `.ttx`, correct and reproducible
+- Since `knead` relies heavily on `fonttools` (specifically, the `ttx` command
+  line tool) to convert `.ttf` files to `.ttx`, correct and reproducible
   behavior is contingent on having the correct version of `fonttools`.
   Therefore, the `fonttools` version number is pinned in `knead`'s
   [`requirements.txt`](https://github.com/font-bakers/knead/blob/master/requirements.txt).
