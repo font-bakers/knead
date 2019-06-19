@@ -1,6 +1,7 @@
 # Quickstart
 
-For more information on how `knead` works, refer to the user guide.
+For more information on how `knead` works, refer to [the user
+guide](https://font-bakers.github.io/knead/user-guide/).
 
 ## Installation
 
@@ -10,7 +11,7 @@ The latest release of `knead` can be installed from PyPI:
 pip install knead
 ```
 
-The bleeding edge development branch of `knead` can be cloned from GitHub:
+The bleeding edge development branch of `knead` can be installed from GitHub:
 
 ```bash
 pip install git+https://github.com/font-bakers/knead.git
@@ -18,7 +19,7 @@ pip install git+https://github.com/font-bakers/knead.git
 
 ## Usage
 
-To run `knead` on the command line:
+On the command line:
 
 ```bash
 knead --input INPUT_FORMAT --output OUTPUT_FORMAT --directory PATH/TO/DATA/
