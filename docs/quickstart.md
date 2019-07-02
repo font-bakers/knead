@@ -48,6 +48,11 @@ _In other words, `--directory` is not the directory containing the `.ttf` files.
 It is a directory that contains a subdirectory (called `ttf`) containing the
 `.ttf` files._
 
+It is recommended that users organize their data similarly: that is, each
+directory contains only subdirectories with the same data in various different
+data formats. In this way, each directory can be semantically associated with a
+single data set, irrespective of its data format.
+
 As `knead` does each conversion, a new subdirectory will be made in `data/`,
 each with the corresponding file extension.Ultimately, after `.ttf` files are
 completely converted and sampled to `.npy` files, the `data/` directory will
