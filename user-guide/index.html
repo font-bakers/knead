@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>User Guide - Knead</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "User Guide";
+    var mkdocs_page_input_path = "user-guide.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Knead</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../quickstart/">Quickstart</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">User Guide</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#user-guide">User Guide</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#glyphs-contours-and-bezier-curves">Glyphs, contours and Bezier curves</a></li>
+        
+            <li><a class="toctree-l3" href="#the-knead-data-pipeline">The knead data pipeline</a></li>
+        
+            <li><a class="toctree-l3" href="#miscellaneous-notes">Miscellaneous notes</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../developer-guide/">Developer Guide</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../contributing/">Contributing</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">About</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="https://github.com/font-bakers/knead/blob/master/CODE_OF_CONDUCT.md">Code of Conduct</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="https://github.com/font-bakers/knead/blob/master/LICENSE">License</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="https://pypi.org/project/knead/">PyPI</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Knead</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>User Guide</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/font-bakers/knead/edit/master/docs/user-guide.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="user-guide">User Guide</h1>
+<p>For technical details on various data formats, refer to <a href="https://font-bakers.github.io/knead/developer-guide/">the developer
+guide</a>.</p>
+<h2 id="glyphs-contours-and-bezier-curves">Glyphs, contours and Bezier curves</h2>
+<p>Before explaining <code>knead</code>'s internals, it is necessary to introduce how vector
+typefaces are represented.</p>
+<ol>
+<li>A typeface is composed of one or more fonts.</li>
+<li>A font is composed of several glyphs.</li>
+<li>A glyph is composed of one or more (closed) contours.</li>
+<li>A contour is composed of several <a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve">Bezier
+   curves</a>. <a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Quadratic_B%C3%A9zier_curves">Quadratic Bezier
+   curves</a>
+   are by far the most common.</li>
+<li>A (quadratic) Bezier curve is composed of exactly three control points.</li>
+<li>A control point is composed of an x and a y coordinate.</li>
+</ol>
+<p>The following image illustrates all these concepts. The ampersand is composed of
+three contours (one outer contour and two more for each counter space).</p>
+<p>Each contour is red, and is composed of several Bezier curves. Each Bezier curve
+is given by a black-grey-black sequence of points, denoting the on-off-on curve
+control points. (Note that the linear interpolations of each pair of control
+points <em>is not the same</em> as the Bezier curve, which is an interpolation of the
+interpolations).</p>
+<p><img alt="Ampersand" src="../img/ampersand.png" /></p>
+<h2 id="the-knead-data-pipeline">The <code>knead</code> data pipeline</h2>
+<p>Under the hood, the data conversion pipeline looks like this:</p>
+<pre><code>----------      ----------     -----------     ---------     ----------
+|  .ttf  | --&gt;  |  .ttx  | --&gt; |  .json  | --&gt; |  .pb  | --&gt; |  .npy  |
+----------      ----------     -----------     ---------     ----------
+</code></pre>
+
+<p>Each conversion between two data formats is explained in a different section
+below.</p>
+<h3 id="ttf-to-ttx"><code>.ttf</code> to <code>.ttx</code></h3>
+<p>This conversion is handled by the <code>fonttools</code> <code>ttx</code> command line utility. For
+more information, refer to the <a href="https://github.com/fonttools/fonttools#ttx--from-opentype-and-truetype-to-xml-and-back"><code>fonttools</code>
+documentation</a>.</p>
+<p>Running <code>knead --input ttf --output ttx MyFont.ttf</code> is essentially a thin
+callthrough to <code>ttx -q -o MyFont.ttx MyFont.ttf</code>.</p>
+<p>Refer to <a href="https://font-bakers.github.io/knead/developer-guide/">the developer guide</a>
+for more information on the <code>.ttf</code> and <code>.ttx</code> file formats.</p>
+<h3 id="ttx-to-json"><code>.ttx</code> to <code>.json</code></h3>
+<p>This is done in Python, using the <code>xml</code> library, and following all the TrueType
+rules described above.</p>
+<p>The JSON object is structured as a dictionary, keyed by the character (e.g.
+<code>"A"</code> or <code>"exclam"</code>), and valued by quadruply-nested lists. The four layers of
+nesting are best explained by code:</p>
+<pre><code class="python">with open(&quot;MyFont.json&quot;, &quot;r&quot;) as f:
+    font = json.read(f)
+
+glyph = font[&quot;A&quot;]
+assert len(glyph) == num_contours_in_glyph
+
+contour = glyph[0]
+assert len(contour) == num_beziers_in_contour
+
+bezier = glyph[0]
+assert len(bezier) == 3  # Number of control points in a quadratic Bezier curve
+
+control_point = bezier[0]
+assert len(control_point) = 2  # x and y coordinates
+</code></pre>
+
+<h3 id="json-to-pb"><code>.json</code> to <code>.pb</code></h3>
+<p>This is done in Python, using the <code>protobuf</code> library.</p>
+<p>Refer to the <a href="https://font-bakers.github.io/knead/developer-guide/#protocol-buffers-protobufs">developer
+guide</a>
+for more information on what protocol buffers are and how <code>knead</code> uses them.</p>
+<p>Note that <code>.pb</code> files are saved with <code>_upper</code> and <code>_lower</code> since some file
+systems do not distinguish between uppercase and lowercase filenames.</p>
+<h3 id="pb-to-npy"><code>.pb</code> to <code>.npy</code></h3>
+<p>This is done in Python, using the <code>numpy</code> library.</p>
+<p>Note that unlike all other conversions, a single <code>.pb</code> file can be converted to
+<em>several</em> <code>.npy</code> files (e.g. by changing the number of samples per Bezier curve
+via <code>--num_samples</code>, etc.)</p>
+<h2 id="miscellaneous-notes">Miscellaneous notes</h2>
+<ul>
+<li>
+<p>It is possible to run the data pipeline in reverse: e.g. we can convert <code>.ttx</code>
+  files back to <code>.ttf</code> files, and it is theoretically possible to convert
+  <code>.json</code> files back into <code>.ttx</code> files, etc. <em>This is currently not a
+  development priority.</em></p>
+</li>
+<li>
+<p><code>.ttf</code> is the only font file format currently supported: in particular, <code>.otf</code>
+  files are not supported.</p>
+</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../developer-guide/" class="btn btn-neutral float-right" title="Developer Guide">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../quickstart/" class="btn btn-neutral" title="Quickstart"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/font-bakers/knead/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../quickstart/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../developer-guide/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
