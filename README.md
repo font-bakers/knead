@@ -12,11 +12,11 @@ font files for deep learning applications.
 
 ## Table of Contents
 
-- [Installation](#Installation)
-- [Usage](#Usage)
-- [Documentation](#Documentation)
-- [Contributing](#Contributing)
-- [License](#License)
+* [Installation](#Installation)
+* [Usage](#Usage)
+* [Documentation](#Documentation)
+* [Contributing](#Contributing)
+* [License](#License)
 
 ## Installation
 
