@@ -33,16 +33,16 @@ knead --input INPUT_FORMAT --output OUTPUT_FORMAT --directory PATH/TO/DATA/
 ```
 
 1. The `--input` and `--output` flags must be one of:
-    - `ttf`: a `.ttf` font file.
-    - `ttx`: a `.ttx` XML format of the font. For more details, refer to
-      the [`fonttools`
-      documentation](https://github.com/fonttools/fonttools#ttx--from-opentype-and-truetype-to-xml-and-back).
-    - `json`: a `.json` format of the font.
-    - `pb`: a `.pb` serialized protobuf format of each glyph in each font.
-    - `npy`: a `.npy` format of samples from quadratic Bezier curves in each
-      glyph in each font.
+  * `ttf`: a `.ttf` font file.
+  * `ttx`: a `.ttx` XML format of the font. For more details, refer to
+    the [`fonttools`
+    documentation](https://github.com/fonttools/fonttools#ttx--from-opentype-and-truetype-to-xml-and-back).
+  * `json`: a `.json` format of the font.
+  * `pb`: a `.pb` serialized protobuf format of each glyph in each font.
+  * `npy`: a `.npy` format of samples from quadratic Bezier curves in each
+    glyph in each font.
 
-2. The `--directory` must have the following structure:
+1. The `--directory` must have the following structure:
 
 ```
 data

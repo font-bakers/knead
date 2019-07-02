@@ -17,23 +17,23 @@ whether the point is "on curve" or "off curve".
 There are some important rules on how to understand these points.
 
 1. If two successive points are "on" this means that they form a line.
-2. If three points are "on", "off", "on" then this defines a quadratic Bezier
+1. If three points are "on", "off", "on" then this defines a quadratic Bezier
    curve.
-3. If there are several "off" points with no "on" point in between them, there
+1. If there are several "off" points with no "on" point in between them, there
    is a virtual "on" point in the middle of the two "off" points. This is a form
    of data compression.
-4. If the first point in a contour is an "off" point go to the last point and
+1. If the first point in a contour is an "off" point go to the last point and
    start from there. If the last point is also "off" start with a virtual "on"
    in between the first and the last one.
 
 For more information, refer to:
 
-- [The `fonttools`
+* [The `fonttools`
   documentation](https://github.com/fonttools/fonttools#ttx--from-opentype-and-truetype-to-xml-and-back).
-- [_Glyph Hell_ by David Turner](http://chanae.walon.org/pub/ttf/ttf_glyphs.htm)
-- [The _FreeType Glyph Conventions_
+* [_Glyph Hell_ by David Turner](http://chanae.walon.org/pub/ttf/ttf_glyphs.htm)
+* [The _FreeType Glyph Conventions_
   documentation](https://www.freetype.org/freetype2/docs/glyphs/glyphs-6.html)
-- [This StackOverflow thread on parsing `.ttf`
+* [This StackOverflow thread on parsing `.ttf`
   files](https://stackoverflow.com/q/20733790)
 
 ## Protocol buffers (protobufs)
@@ -43,7 +43,7 @@ documentation](https://developers.google.com/protocol-buffers/docs/overview),
 protocol buffers are
 
 > a language-neutral, platform-neutral, extensible way of serializing structured
-> data for use in communications protocols, data storage, and more. 
+> data for use in communications protocols, data storage, and more.
 
 For more information on protobufs, please refer to [the protobuf developer
 guide](https://developers.google.com/protocol-buffers/docs/overview), and [the
@@ -69,7 +69,7 @@ protoc --proto_path=knead/utils/ --python_out=knead/utils/ knead/utils/glyph_bat
 
 ## Miscellaneous notes
 
-- Since `knead` relies heavily on `fonttools` (specifically, the `ttx` command
+* Since `knead` relies heavily on `fonttools` (specifically, the `ttx` command
   line tool) to convert `.ttf` files to `.ttx`, correct and reproducible
   behavior is contingent on having the correct version of `fonttools`.
   Therefore, the `fonttools` version number is pinned in `knead`'s
