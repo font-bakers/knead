@@ -9,14 +9,14 @@ Before explaining `knead`'s internals, it is necessary to introduce how vector
 typefaces are represented.
 
 1. A typeface is composed of one or more fonts.
-2. A font is composed of several glyphs.
-3. A glyph is composed of one or more (closed) contours.
-4. A contour is composed of several [Bezier
+1. A font is composed of several glyphs.
+1. A glyph is composed of one or more (closed) contours.
+1. A contour is composed of several [Bezier
    curves](https://en.wikipedia.org/wiki/B%C3%A9zier_curve). [Quadratic Bezier
    curves](https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Quadratic_B%C3%A9zier_curves)
    are by far the most common.
-5. A (quadratic) Bezier curve is composed of exactly three control points.
-6. A control point is composed of an x and a y coordinate.
+1. A (quadratic) Bezier curve is composed of exactly three control points.
+1. A control point is composed of an x and a y coordinate.
 
 The following image illustrates all these concepts. The ampersand is composed of
 three contours (one outer contour and two more for each counter space).
@@ -48,8 +48,8 @@ This conversion is handled by the `fonttools` `ttx` command line utility. For
 more information, refer to the [`fonttools`
 documentation](https://github.com/fonttools/fonttools#ttx--from-opentype-and-truetype-to-xml-and-back).
 
-Running `knead --input ttf --output ttx MyFont.ttf` is essentially a thin callthrough to
-`ttx -q -o MyFont.ttx MyFont.ttf`.
+Running `knead --input ttf --output ttx MyFont.ttf` is essentially a thin
+callthrough to `ttx -q -o MyFont.ttx MyFont.ttf`.
 
 Refer to [the developer guide](https://font-bakers.github.io/knead/developer-guide/)
 for more information on the `.ttf` and `.ttx` file formats.
@@ -101,10 +101,10 @@ via `--num_samples`, etc.)
 
 ## Miscellaneous notes
 
-- It is possible to run the data pipeline in reverse: e.g. we can convert `.ttx`
+* It is possible to run the data pipeline in reverse: e.g. we can convert `.ttx`
   files back to `.ttf` files, and it is theoretically possible to convert
   `.json` files back into `.ttx` files, etc. _This is currently not a
   development priority._
 
-- `.ttf` is the only font file format currently supported: in particular, `.otf`
+* `.ttf` is the only font file format currently supported: in particular, `.otf`
   files are not supported.
